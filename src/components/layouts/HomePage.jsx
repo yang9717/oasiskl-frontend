@@ -15,20 +15,21 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative h-[600px] bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-100"></div>
-            <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
-                <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center -mt-24">
-                <h1 className="text-white text-5xl md:text-6xl font-bold mb-8 max-w-3xl">
-                    Discover Green Spaces in 
-                    <span className="block text-orange-500">Kuala Lumpur</span>
-                </h1>
-                <div className="flex flex-wrap gap-4">
-                    <Link to="/map" className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
-                    Discover Green Spaces
-                    </Link>
-                    <Link to="/grow" className="px-6 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 border border-white text-black font-medium rounded-full transition duration-300">
-                    Grow Your Own Green
-                    </Link>
-                </div>
+        {/* Simplified container structure */}
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+          <h1 className="text-white text-7xl md:text-7xl font-bold mb-8">
+            <span className="whitespace-nowrap">Reconnect With Green Spaces</span>
+            <span className="block text-orange-500 mt-3">in Kuala Lumpur</span>
+          </h1>
+          <div className="flex flex-wrap gap-4 mt-4 justify-center">
+              <Link
+                to="/map"
+                className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
+                Discover Green Spaces
+              </Link>
+              <div className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
+                More to come...
+              </div>
             </div>
         </div>
       </section>
@@ -61,8 +62,8 @@ const HomePage = () => {
                   <div className="w-12 h-12 mb-2 flex items-center justify-center">
                     <Map className="w-10 h-10 text-green-500" />
                   </div>
-                  <p className="text-3xl font-bold text-orange-500">29</p>
-                  <p className="text-sm text-center text-gray-600">Green Spaces<br />Mapped</p>
+                  <p className="text-3xl font-bold text-orange-500">26</p>
+                  <p className="text-sm text-center text-gray-600 mt-2">Green Spaces<br />Mapped</p>
                 </div>
 
                 {/* Plant Species */}
@@ -70,8 +71,8 @@ const HomePage = () => {
                   <div className="w-12 h-12 mb-2 flex items-center justify-center">
                     <Leaf className="w-10 h-10 text-green-500" />
                   </div>
-                  <p className="text-3xl font-bold text-orange-500">100+</p>
-                  <p className="text-sm text-center text-gray-600">Plant Species<br />Documented</p>
+                  <p className="text-3xl font-bold text-orange-500">89</p>
+                  <p className="text-sm text-center text-gray-600 mt-2">Plant Species<br />Documented</p>
                 </div>
 
                 {/* Residents */}
@@ -80,7 +81,7 @@ const HomePage = () => {
                     <Home className="w-10 h-10 text-green-500" />
                   </div>
                   <p className="text-3xl font-bold text-orange-500">8.8 million</p>
-                  <p className="text-sm text-center text-gray-600">Residents<br />in Kuala Lumpur</p>
+                  <p className="text-sm text-center text-gray-600 mt-2">Residents<br />in Kuala Lumpur</p>
                 </div>
               </div>
             </div>
