@@ -60,7 +60,7 @@ const PlantDetails = () => {
             alt={plant.name} 
             className="w-full h-[400px] object-contain p-4"
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/500x500?text=Plant+Image';
+              e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
             }}
           />
         </div>
@@ -172,7 +172,7 @@ const PlantDetails = () => {
                   alt={space.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/300x200?text=Green+Space';
+                    e.target.src = 'https://placehold.co/600x400?text=Green+Space';
                   }}
                 />
               </div>

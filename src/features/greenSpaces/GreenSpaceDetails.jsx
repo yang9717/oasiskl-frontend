@@ -142,7 +142,7 @@ const GreenSpaceDetail = () => {
           alt={greenSpace.name} 
           className="w-full h-full object-cover" 
           onError={(e) => {
-            e.target.src = 'https://via.placeholder.com/800x400?text=Green+Space+Image';
+            e.target.src = 'https://placehold.co/600x400?text=Green+Space+Image';
           }}
         />
       </div>
@@ -330,7 +330,7 @@ const GreenSpaceDetail = () => {
                   alt={plant.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/400x250?text=Plant+Image';
+                    e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
                   }}
                 />
               </div>

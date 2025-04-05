@@ -326,7 +326,7 @@ const GreenMap = () => {
                         alt={space.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/400x300?text=Green+Space';
+                          e.target.src = 'https://placehold.co/600x400?text=Green+Space';
                         }}
                       />
                     </div>
