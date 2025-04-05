@@ -1,13 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/layouts/Layout';
+import HomePage from './components/layouts/HomePage';
+import GreenMap from './features/map/GreenMap';
+import GreenSpaceDetails from './features/greenSpaces/GreenSpaceDetails';
+import PlantDetails from './features/plants/PlantDetails';
 
 const App = () => {
   return (
-    <div>
-      <div className="bg-blue-500 text-white p-4">
-        <h1 className="text-2xl font-bold">Tailwind CSS test</h1>
-      </div>
-    </div>
-  )
-}
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/map" element={<GreenMap />} />
+        <Route path="/green-spaces/:id" element={<GreenSpaceDetails />} />
+        <Route path="/plants/:id" element={<PlantDetails />} />
+      </Routes>
+    </Layout>
+  );
+};
 
-export default App
+export default App;
