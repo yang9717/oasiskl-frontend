@@ -6,6 +6,7 @@ import Papa from 'papaparse';
 const GreenMap = () => {
   // State for filters
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [districts, setDistricts] = useState([]);
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [isFree, setIsFree] = useState(null); // null = any, true = free, false = paid
   const [showResults, setShowResults] = useState(false);
@@ -20,7 +21,8 @@ const GreenMap = () => {
         .then((parsedCsv) => {
           Papa.parse(parsedCsv, {
             complete: (result) => {
-              const districts = result.data.map((row) => row[0]);
+              const districtList = result.data.map((row) => row[0]);
+              setDistricts(districtList);
             }
           })
         })
