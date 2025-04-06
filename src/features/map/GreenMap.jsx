@@ -21,11 +21,15 @@ const GreenMap = () => {
         .then((parsedCsv) => {
           Papa.parse(parsedCsv, {
             complete: (result) => {
+              console.log('results', result.data);
               const districtList = result.data.map((row) => row[0]);
               setDistricts(districtList);
-            }
-          })
+            },
+          });
         })
+        .catch((error) => {
+          console.error('Cannot load CSV File', error);
+        });
     }, []);
 
   // Districts
@@ -206,8 +210,8 @@ const GreenMap = () => {
                     className="block w-full pl-3 pr-10 py-3 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 rounded-lg shadow-sm"
                   >
                     <option value="">All Districts</option>
-                    {districts.map((district) => (
-                      <option key={district} value={district}>
+                    {districts.map((district, index) => (
+                      <option key={index} value={district}>
                         {district}
                       </option>
                     ))}
