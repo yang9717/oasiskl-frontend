@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
+import Papa from 'papaparse';
 
 const GreenMap = () => {
   // State for filters
+  const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [isFree, setIsFree] = useState(null); // null = any, true = free, false = paid
   const [showResults, setShowResults] = useState(false);
   const [filteredSpaces, setFilteredSpaces] = useState([]);
   const [displayedDistrict, setDisplayedDistrict] = useState('');
+  // const allGreenSpaces = {};
 
   // Scroll to top when the component mounts
   useEffect(() => {
       window.scrollTo(0, 0);
+
+      fetch('/space_info.csv')
+        .then(response => response.text())
+        .then(text => {
+          Papa.parse(text, {
+            header: true,
+            complete: (result) => {
+              populateDistricts(result.data);
+              // populateGreenSpaces(result.data);
+            }
+          });
+        });
     }, []);
 
-  // Districts
-  const districts = [
-    'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
-    'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
-    'Bandar Tun Razak', 'Seputeh'
-  ];
+  const populateDistricts = (data) => {
+    const districtList = data.map((row) => row['space_district']);
+    const uniqueDistricts = [...new Set(districtList)];
+    setDistricts(uniqueDistricts);
+  };
 
   // Features (Five categories)
   const features = [
@@ -55,7 +69,7 @@ const GreenMap = () => {
     { 
       id: 18, 
       name: 'Taman Tugu', 
-      district: 'Segambut',
+      district: 'Segambut ',
       image: '/src/assets/space_images/18.jpg',
       isFree: true,
       features: ['family', 'fitness', 'pet'],
