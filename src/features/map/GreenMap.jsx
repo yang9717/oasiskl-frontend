@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
+import Papa from 'papaparse';
 
 const GreenMap = () => {
   // State for filters
@@ -14,14 +15,23 @@ const GreenMap = () => {
   // Scroll to top when the component mounts
   useEffect(() => {
       window.scrollTo(0, 0);
+      fetch('../../assets/datasets/space_info.csv')
+        .then((response) => response.text())
+        .then((parsedCsv) => {
+          Papa.parse(parsedCsv, {
+            complete: (result) => {
+              const districts = result.data.map((row) => row[0]);
+            }
+          })
+        })
     }, []);
 
   // Districts
-  const districts = [
-    'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
-    'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
-    'Bandar Tun Razak', 'Seputeh', 'Test'
-  ];
+  // const districts = [
+  //   'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
+  //   'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
+  //   'Bandar Tun Razak', 'Seputeh'
+  // ];
 
   // Features (Five categories)
   const features = [
