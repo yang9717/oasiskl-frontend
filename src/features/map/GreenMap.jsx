@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
-import Papa from 'papaparse';
-import L from 'leaflet';
 
 const GreenMap = () => {
   // State for filters
-  const [districts, setDistricts] = useState([]);
-  const [allGreenSpaces, setAllGreenSpaces] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [isFree, setIsFree] = useState(null); // null = any, true = free, false = paid
@@ -17,39 +13,15 @@ const GreenMap = () => {
 
   // Scroll to top when the component mounts
   useEffect(() => {
-    const map = L.map('map').setView([3.1390, 101.6869], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-    
-    // Fetch CSV data
-    fetch('../../assets/datasets/space_info.csv')
-      .then(res => res.text())
-      .then(csv => {
-        Papa.parse(csv, {
-          complete: (result) => {
-            const data = result.data.slice(1);
-            setAllGreenSpaces(data);
-            populateDistricts(data);
-          }
-        });
-      });
-    // Scroll to top when the component mounts
-    window.scrollTo(0, 0);
-  }, []);
-
-  const populateDistricts = (data) => {
-    const districtSet = new Set();
-    data.forEach(loc => districtSet.add(loc.space_district));
-    setDistricts([...districtSet]);
-  };
+      window.scrollTo(0, 0);
+    }, []);
 
   // Districts
-  // const districts = [
-  //   'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
-  //   'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
-  //   'Bandar Tun Razak', 'Seputeh'
-  // ];
+  const districts = [
+    'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
+    'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
+    'Bandar Tun Razak', 'Seputeh'
+  ];
 
   // Features (Five categories)
   const features = [
@@ -60,11 +32,60 @@ const GreenMap = () => {
     { id: 'fitness', name: 'Fitness & Sports', icon: <Dumbbell size={16} /> }
   ];
 
+  // Mock data for green spaces
+  const allGreenSpaces = [
+    { 
+      id: 16, 
+      name: 'KLCC Park', 
+      district: 'Bukit Bintang',
+      image: '/src/assets/space_images/16.jpg',
+      isFree: true,
+      features: ['family', 'accessible', 'fitness'],
+      operationTime: 'Daily: 7:00 - 22:00'
+    },
+    { 
+      id: 17, 
+      name: 'Perdana Botanical Gardens', 
+      district: 'Titiwangsa',
+      image: '/src/assets/space_images/17.jpg',
+      isFree: true,
+      features: ['family', 'event', 'accessible', 'fitness'],
+      operationTime: 'Daily: 7:00 - 20:00'
+    },
+    { 
+      id: 18, 
+      name: 'Taman Tugu', 
+      district: 'Segambut',
+      image: '/src/assets/space_images/18.jpg',
+      isFree: true,
+      features: ['family', 'fitness', 'pet'],
+      operationTime: 'Daily: 7:00 - 18:00'
+    },
+    { 
+      id: 19, 
+      name: 'Forest Research Institute Malaysia (FRIM)', 
+      district: 'Kepong',
+      image: '/src/assets/space_images/19.jpg',
+      isFree: false,
+      features: ['family', 'event', 'fitness'],
+      operationTime: 'Tue-Sun: 8:00 - 17:00'
+    },
+    { 
+      id: 20, 
+      name: 'Bukit Kiara Park', 
+      district: 'Segambut',
+      image: '/src/assets/space_images/20.jpg',
+      isFree: true,
+      features: ['family', 'fitness', 'pet'],
+      operationTime: 'Daily: 24 hours'
+    }
+  ];
+
   // Search function
   const handleSearch = () => {
     const filtered = allGreenSpaces.filter(space => {
       // Filter by district
-      if (selectedDistrict && space.space_district !== selectedDistrict) {
+      if (selectedDistrict && space.district !== selectedDistrict) {
         return false;
       }
       
@@ -79,7 +100,7 @@ const GreenMap = () => {
       }
       
       // Filter by cost
-      if (isFree !== null && space.space_free !== isFree) {
+      if (isFree !== null && space.isFree !== isFree) {
         return false;
       }
       
@@ -142,8 +163,12 @@ const GreenMap = () => {
             Let's Find Your <span className="text-orange-500">Perfect Green Space</span>
             <span role="img" aria-label="Trees"> 🌳🌳🌳</span>
           </h2>  
-          {/* Map */}
-          <div id="map"></div>
+          {/* Map interface would go here */}
+          <div className="h-96 bg-gray-200 rounded-lg mt-8">
+            <div className="h-full flex items-center justify-center">
+              <p className="text-gray-500">Interactive Map Coming Soon</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -169,8 +194,8 @@ const GreenMap = () => {
                     className="block w-full pl-3 pr-10 py-3 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 rounded-lg shadow-sm"
                   >
                     <option value="">All Districts</option>
-                    {districts.map((district, index) => (
-                      <option key={index} value={district}>
+                    {districts.map((district) => (
+                      <option key={district} value={district}>
                         {district}
                       </option>
                     ))}
