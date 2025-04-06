@@ -20,7 +20,7 @@ const GreenMap = () => {
   const districts = [
     'Kepong', 'Batu', 'Wangsa Maju', 'Setiawangsa', 'Segambut', 
     'Titiwangsa', 'Bukit Bintang', 'Lembah Pantai', 'Cheras', 
-    'Bandar Tun Razak', 'Seputeh'
+    'Bandar Tun Razak', 'Seputeh', 'Test'
   ];
 
   // Features (Five categories)
