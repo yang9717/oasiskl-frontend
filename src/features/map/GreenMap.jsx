@@ -6,13 +6,13 @@ import Papa from 'papaparse';
 const GreenMap = () => {
   // State for filters
   const [districts, setDistricts] = useState([]);
+  const [greenSpaces, setGreenSpaces] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [isFree, setIsFree] = useState(null); // null = any, true = free, false = paid
   const [showResults, setShowResults] = useState(false);
   const [filteredSpaces, setFilteredSpaces] = useState([]);
   const [displayedDistrict, setDisplayedDistrict] = useState('');
-  // const allGreenSpaces = {};
 
   // Scroll to top when the component mounts
   useEffect(() => {
@@ -25,7 +25,7 @@ const GreenMap = () => {
             header: true,
             complete: (result) => {
               populateDistricts(result.data);
-              // populateGreenSpaces(result.data);
+              populateGreenSpaces(result.data);
             }
           });
         });
@@ -35,6 +35,31 @@ const GreenMap = () => {
     const districtList = data.map((row) => row['space_district']);
     const uniqueDistricts = [...new Set(districtList)];
     setDistricts(uniqueDistricts);
+  };
+
+  const populateGreenSpaces = (data) => {
+    // doesn't include image
+    const greenSpacesList = data.map((row) => ({
+      id: row["space_id"],
+      name: row["space_name"],
+      district: row["space_district"],
+      address: row["space_address"],
+      description: row["space_description_content"],
+      isFree: row["space_free"] === "true",
+      fee: row["space_fee"],
+      operationTime: row["space_business_hours"],
+      isFamilyFree: row["space_family"] === "true",
+      familyContent: row["space_family_content"],
+      hasAmenities: row["space_amentities"] === "true",
+      features: row["space_amentities_content"].split(', '),
+      isAccessible: row["space_accessible"] === "true",
+      accessibleContent: row["space_accessible_content"],
+      isPetFree: row["space_pet"] === "true",
+      petContent: row["space_pet_content"],
+      latitude: parseFloat(row["space_latitude"]),
+      longitude: parseFloat(row["space_longitude"]) 
+    }));
+    setGreenSpaces(greenSpacesList);
   };
 
   // Features (Five categories)
@@ -47,57 +72,57 @@ const GreenMap = () => {
   ];
 
   // Mock data for green spaces
-  const allGreenSpaces = [
-    { 
-      id: 16, 
-      name: 'KLCC Park', 
-      district: 'Bukit Bintang',
-      image: '/src/assets/space_images/16.jpg',
-      isFree: true,
-      features: ['family', 'accessible', 'fitness'],
-      operationTime: 'Daily: 7:00 - 22:00'
-    },
-    { 
-      id: 17, 
-      name: 'Perdana Botanical Gardens', 
-      district: 'Titiwangsa',
-      image: '/src/assets/space_images/17.jpg',
-      isFree: true,
-      features: ['family', 'event', 'accessible', 'fitness'],
-      operationTime: 'Daily: 7:00 - 20:00'
-    },
-    { 
-      id: 18, 
-      name: 'Taman Tugu', 
-      district: 'Segambut ',
-      image: '/src/assets/space_images/18.jpg',
-      isFree: true,
-      features: ['family', 'fitness', 'pet'],
-      operationTime: 'Daily: 7:00 - 18:00'
-    },
-    { 
-      id: 19, 
-      name: 'Forest Research Institute Malaysia (FRIM)', 
-      district: 'Kepong',
-      image: '/src/assets/space_images/19.jpg',
-      isFree: false,
-      features: ['family', 'event', 'fitness'],
-      operationTime: 'Tue-Sun: 8:00 - 17:00'
-    },
-    { 
-      id: 20, 
-      name: 'Bukit Kiara Park', 
-      district: 'Segambut',
-      image: '/src/assets/space_images/20.jpg',
-      isFree: true,
-      features: ['family', 'fitness', 'pet'],
-      operationTime: 'Daily: 24 hours'
-    }
-  ];
+  // const allGreenSpaces = [
+  //   { 
+  //     id: 16, 
+  //     name: 'KLCC Park', 
+  //     district: 'Bukit Bintang',
+  //     image: '/src/assets/space_images/16.jpg',
+  //     isFree: true,
+  //     features: ['family', 'accessible', 'fitness'],
+  //     operationTime: 'Daily: 7:00 - 22:00'
+  //   },
+  //   { 
+  //     id: 17, 
+  //     name: 'Perdana Botanical Gardens', 
+  //     district: 'Titiwangsa',
+  //     image: '/src/assets/space_images/17.jpg',
+  //     isFree: true,
+  //     features: ['family', 'event', 'accessible', 'fitness'],
+  //     operationTime: 'Daily: 7:00 - 20:00'
+  //   },
+  //   { 
+  //     id: 18, 
+  //     name: 'Taman Tugu', 
+  //     district: 'Segambut ',
+  //     image: '/src/assets/space_images/18.jpg',
+  //     isFree: true,
+  //     features: ['family', 'fitness', 'pet'],
+  //     operationTime: 'Daily: 7:00 - 18:00'
+  //   },
+  //   { 
+  //     id: 19, 
+  //     name: 'Forest Research Institute Malaysia (FRIM)', 
+  //     district: 'Kepong',
+  //     image: '/src/assets/space_images/19.jpg',
+  //     isFree: false,
+  //     features: ['family', 'event', 'fitness'],
+  //     operationTime: 'Tue-Sun: 8:00 - 17:00'
+  //   },
+  //   { 
+  //     id: 20, 
+  //     name: 'Bukit Kiara Park', 
+  //     district: 'Segambut',
+  //     image: '/src/assets/space_images/20.jpg',
+  //     isFree: true,
+  //     features: ['family', 'fitness', 'pet'],
+  //     operationTime: 'Daily: 24 hours'
+  //   }
+  // ];
 
   // Search function
   const handleSearch = () => {
-    const filtered = allGreenSpaces.filter(space => {
+    const filtered = greenSpaces.filter(space => {
       // Filter by district
       if (selectedDistrict && space.district !== selectedDistrict) {
         return false;
