@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
 import Papa from 'papaparse';
@@ -13,23 +13,44 @@ const GreenMap = () => {
   const [showResults, setShowResults] = useState(false);
   const [filteredSpaces, setFilteredSpaces] = useState([]);
   const [displayedDistrict, setDisplayedDistrict] = useState('');
+  const [interactiveMap, setInteractiveMap] = useState(null);
+  const mapRef = useRef(null);
+  const mapMarkersRef = useRef([]);
 
-  // Scroll to top when the component mounts
   useEffect(() => {
-      window.scrollTo(0, 0);
+    if (mapRef.current && !mapRef.current._leaflet_id) {
+      import('leaflet').then(L => {
+        const map = L.map(mapRef.current).setView(
+          [3.1390, 101.6869], 11
+        );
+        setInteractiveMap(map);
 
-      fetch('/space_info.csv')
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        mapRef.current = map;
+
+        fetch('/space_info.csv')
         .then(response => response.text())
         .then(text => {
           Papa.parse(text, {
             header: true,
             complete: (result) => {
               populateDistricts(result.data);
-              populateGreenSpaces(result.data);
-            }
+              populateGreenSpaces(result.data, map);
+            },
           });
         });
-    }, []);
+      });
+    }
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, []);
 
   const populateDistricts = (data) => {
     const districtList = data.map((row) => row['space_district']);
@@ -37,7 +58,7 @@ const GreenMap = () => {
     setDistricts(uniqueDistricts);
   };
 
-  const populateGreenSpaces = (data) => {
+  const populateGreenSpaces = (data, map) => {
     // doesn't include image
     const greenSpacesList = data.map((row) => ({
       id: row["space_id"],
@@ -45,21 +66,40 @@ const GreenMap = () => {
       district: row["space_district"],
       address: row["space_address"],
       description: row["space_description_content"],
-      isFree: row["space_free"] === "true",
+      isFree: row["space_free"] === "TRUE",
       fee: row["space_fee"],
       operationTime: row["space_business_hours"],
-      isFamilyFree: row["space_family"] === "true",
+      isFamilyFree: row["space_family"] === "TRUE",
       familyContent: row["space_family_content"],
-      hasAmenities: row["space_amentities"] === "true",
+      hasAmenities: row["space_amentities"] === "TRUE",
       features: row["space_amentities_content"].split(', '),
-      isAccessible: row["space_accessible"] === "true",
+      isAccessible: row["space_accessible"] === "TRUE",
       accessibleContent: row["space_accessible_content"],
-      isPetFree: row["space_pet"] === "true",
+      isPetFree: row["space_pet"] === "TRUE",
       petContent: row["space_pet_content"],
       latitude: parseFloat(row["space_latitude"]),
       longitude: parseFloat(row["space_longitude"]) 
     }));
     setGreenSpaces(greenSpacesList);
+    addMarkers(greenSpacesList, map);
+  };
+
+  const addMarkers = (greenSpaces, map) => {
+    mapMarkersRef.current.forEach((m) => m.remove());
+    mapMarkersRef.current = [];
+  
+    greenSpaces.forEach(gs => {
+      const lat = parseFloat(gs.latitude);
+      const lng = parseFloat(gs.longitude);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        import('leaflet').then(L => {
+          const marker = L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(`<strong>${gs.name}</strong><br>${gs.address}`);
+          mapMarkersRef.current.push(marker);
+        });
+      };
+    });
   };
 
   // Features (Five categories)
@@ -149,6 +189,9 @@ const GreenMap = () => {
     setFilteredSpaces(filtered);
     setShowResults(true);
     setDisplayedDistrict(selectedDistrict);
+    if (interactiveMap) {
+      addMarkers(filtered, interactiveMap);
+    }
   };
 
   // Reset all filters
@@ -158,6 +201,9 @@ const GreenMap = () => {
     setIsFree(null);
     setShowResults(false);
     setDisplayedDistrict('');
+    if (interactiveMap){
+      addMarkers(greenSpaces, interactiveMap);
+    }
   };
 
   // Feature toggle function
@@ -170,9 +216,10 @@ const GreenMap = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Hero Section */}
       <section className="bg-gray-600 bg-opacity-80 bg-blend-overlay bg-cover bg-center">
+        <div ref={mapRef} className="w-full h-full"></div>
         <div className="container mx-auto py-20 px-4">
           <div className="max-w-4xl">
             <h1 className="text-5xl font-bold text-white mb-4">
@@ -205,9 +252,10 @@ const GreenMap = () => {
           {/* Map interface would go here */}
           <div className="h-96 bg-gray-200 rounded-lg mt-8">
             <div className="h-full flex items-center justify-center">
-              <p className="text-gray-500">Interactive Map Coming Soon</p>
+              <div ref={mapRef} className="w-full h-full">
+              </div>
             </div>
-          </div>
+          </div>  
         </div>
       </section>
 
