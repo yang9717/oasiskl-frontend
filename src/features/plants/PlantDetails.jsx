@@ -199,7 +199,7 @@ const PlantDetails = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-800 text-lg">Green Space #{space.space_id}</h3>
+                  <h3 className="font-semibold text-gray-800 text-lg">{space.space_name}</h3>
                   <p className="text-gray-600 flex items-center mt-2">
                     <MapPin className="w-4 h-4 mr-2 text-green-600" />
                     Kuala Lumpur
