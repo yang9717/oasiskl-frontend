@@ -185,7 +185,7 @@ const PlantDetails = () => {
             {otherSpaces.map((space) => (
               <Link 
                 key={space.space_id} 
-                to={`/green-spaces/${space.space_id}`}
+                to={`/spaces/${space.space_id}`}
                 className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="h-48 bg-gray-100">
