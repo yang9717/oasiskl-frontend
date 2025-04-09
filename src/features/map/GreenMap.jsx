@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
-import Papa from 'papaparse';
+import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Accessibility, Dog, CircleArrowLeft} from 'lucide-react';
 
 const GreenMap = () => {
   // State for filters
@@ -15,6 +13,8 @@ const GreenMap = () => {
   const [filteredSpaces, setFilteredSpaces] = useState([]);
   const [displayedDistrict, setDisplayedDistrict] = useState('');
   const [interactiveMap, setInteractiveMap] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const mapRef = useRef(null);
   const mapMarkersRef = useRef([]);
 
@@ -86,13 +86,13 @@ const GreenMap = () => {
       isFree: row["space_free"] === "TRUE" || row["space_free"] === true,
       fee: row["space_fee"],
       operationTime: row["space_business_hours"],
-      isFamilyFree: row["space_family"] === "TRUE" || row["space_family"] === tru,
+      isFamilyFriendly: row["space_family"] === "TRUE" || row["space_family"] === true,
       familyContent: row["space_family_content"],
-      hasAmenities: row["space_amenities"] === "TRUE" || row["space_amenities"] === tru,
-      features: row["space_amentities_content"].split(', '),
-      isAccessible: row["space_accessible"] === "TRUE" || row["space_accessible"] === tru,
+      hasAmenities: row["space_amenities"] === "TRUE" || row["space_amenities"] === true,
+      features: row["space_amenities_content"] ? row["space_amenities_content"].split(', ') : [],
+      isAccessible: row["space_accessible"] === "TRUE" || row["space_accessible"] === true,
       accessibleContent: row["space_accessible_content"],
-      isPetFree: row["space_pet"] === "TRUE" || row["space_pet"] === tru,
+      isPetFriendly: row["space_pet"] === "TRUE" || row["space_pet"] === true,
       petContent: row["space_pet_content"],
       latitude: parseFloat(row["space_latitude"]),
       longitude: parseFloat(row["space_longitude"]) 
@@ -137,9 +137,9 @@ const GreenMap = () => {
       // Filter by features
       if (selectedFeatures.length > 0) {
         const hasAllSelectedFeatures = selectedFeatures.every(feature => {
-          if (feature === 'family') return space.isFamilyFree;
+          if (feature === 'family') return space.isFamilyFriendly;
           if (feature === 'accessible') return space.isAccessible;
-          if (feature === 'pet') return space.isPetFree;
+          if (feature === 'pet') return space.isPetFriendly;
           return false;
         });
         if (!hasAllSelectedFeatures) {
@@ -434,32 +434,32 @@ const GreenMap = () => {
                           <div className="mt-4 flex items-center flex-wrap">
                             <div className="text-sm text-gray-500 mr-3">Available Features:</div>
                             <div className="flex flex-wrap gap-2">
-                              {features.map((feature) => {
-                                let isAvailable = false;
-                                
-                                // Check if this feature is available for this space
-                                if (feature.id === 'family' && space.isFamilyFree) isAvailable = true;
-                                if (feature.id === 'accessible' && space.isAccessible) isAvailable = true;
-                                if (feature.id === 'pet' && space.isPetFree) isAvailable = true;
-                                
-                                // Only show the feature if it's available
-                                return isAvailable ? (
-                                  <span
-                                    key={feature.id}
-                                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
-                                  >
-                                    {feature.icon}
-                                    <span className="ml-1">{feature.name}</span>
-                                  </span>
-                                ) : null;
-                              })}
+                            {features.map((feature) => {
+                              let isAvailable = false;
+                              
+                              // Check if this feature is available for this space
+                              if (feature.id === 'family' && space.isFamilyFriendly) isAvailable = true;
+                              if (feature.id === 'accessible' && space.isAccessible) isAvailable = true;
+                              if (feature.id === 'pet' && space.isPetFriendly) isAvailable = true;
+                              
+                              // Only show the feature if it's available
+                              return isAvailable ? (
+                                <span
+                                  key={feature.id}
+                                  className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                                >
+                                  {feature.icon}
+                                  <span className="ml-1">{feature.name}</span>
+                                </span>
+                              ) : null;
+                            })}
                             </div>
                           </div>
                         </div>
                         
                         <div className="mt-auto pt-5">
                           <Link
-                            to={`/green-spaces/${space.id}`}
+                            to={`/spaces/${space.id}`}
                             className="inline-flex items-center px-5 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-all duration-300"
                           >
                             View Details
