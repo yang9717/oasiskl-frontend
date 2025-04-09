@@ -7,6 +7,7 @@ const GreenSpaceDetail = () => {
   const { id } = useParams();
   const mapRef = useRef(null);
   const [plants, setPlants] = useState([]);
+  const [greenSpace, setGreenSpace] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -37,31 +38,51 @@ const GreenSpaceDetail = () => {
         setLoading(false);
       }
     };
+
+    const fetchGreenSpace = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_BASE_URL}/spaces/${id}`);
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch space: ${response.status} ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        setGreenSpace(data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching space:', err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
     
     fetchPlants();
+    fetchGreenSpace();
   }, [id, API_BASE_URL]);
   
   // Mock data for the green space
-  const greenSpace = {
-    space_id: id,
-    space_name: "Lake Gardens (Taman Tasik Perdana)",
-    space_district: "Kuala Lumpur",
-    space_address: "Jalan Kebun Bunga, Tasik Perdana, 55100 Kuala Lumpur",
-    space_description_content: "Lake Gardens is a 92-hectare park established in 1888, featuring scenic landscapes, a deer park, butterfly park, and bird park. Visitors can enjoy jogging tracks, picnic areas, and beautifully maintained gardens with exotic plants. Perfect for families and nature lovers looking for a peaceful retreat in the heart of Kuala Lumpur.",
-    space_free: "FALSE",
-    space_fee: 12,
-    space_business_hours: "Daily: 7:00 - 20:00",
-    space_family: "TRUE",
-    space_family_content: "Playground, Picnic Areas, Child-friendly Pathways, Family Restrooms",
-    space_amenities: "TRUE",
-    space_amenities_content: "Public Restrooms, Drinking Fountains, Sheltered Rest Areas, Information Boards, Trash Bins",
-    space_accessible: "TRUE",
-    space_accessible_content: "Wheelchair Accessible Paths, Disabled Parking, Accessible Restrooms",
-    space_pet: "TRUE",
-    space_pet_content: "Dog-Friendly Areas, Pet Waste Stations, Leash-Free Zones",
-    space_latitude: 3.1478,
-    space_longitude: 101.6881
-  };
+  // const greenSpace = {
+  //   space_id: id,
+  //   space_name: "Lake Gardens (Taman Tasik Perdana)",
+  //   space_district: "Kuala Lumpur",
+  //   space_address: "Jalan Kebun Bunga, Tasik Perdana, 55100 Kuala Lumpur",
+  //   space_description_content: "Lake Gardens is a 92-hectare park established in 1888, featuring scenic landscapes, a deer park, butterfly park, and bird park. Visitors can enjoy jogging tracks, picnic areas, and beautifully maintained gardens with exotic plants. Perfect for families and nature lovers looking for a peaceful retreat in the heart of Kuala Lumpur.",
+  //   space_free: "FALSE",
+  //   space_fee: 12,
+  //   space_business_hours: "Daily: 7:00 - 20:00",
+  //   space_family: "TRUE",
+  //   space_family_content: "Playground, Picnic Areas, Child-friendly Pathways, Family Restrooms",
+  //   space_amenities: "TRUE",
+  //   space_amenities_content: "Public Restrooms, Drinking Fountains, Sheltered Rest Areas, Information Boards, Trash Bins",
+  //   space_accessible: "TRUE",
+  //   space_accessible_content: "Wheelchair Accessible Paths, Disabled Parking, Accessible Restrooms",
+  //   space_pet: "TRUE",
+  //   space_pet_content: "Dog-Friendly Areas, Pet Waste Stations, Leash-Free Zones",
+  //   space_latitude: 3.1478,
+  //   space_longitude: 101.6881
+  // };
 
   const scrollToMap = () => {
     document.getElementById('location-map').scrollIntoView({ behavior: 'smooth' });
