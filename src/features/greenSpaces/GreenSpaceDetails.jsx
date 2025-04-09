@@ -7,7 +7,7 @@ const GreenSpaceDetail = () => {
   const { id } = useParams();
   const mapRef = useRef(null);
   const [plants, setPlants] = useState([]);
-  const [greenSpace, setGreenSpace] = useState([]);
+  const [greenSpace, setGreenSpace] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -18,7 +18,7 @@ const GreenSpaceDetail = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  // Fetch plants data from the backend
+  // Fetch space details and plants data from the backend
   useEffect(() => {
     const fetchPlants = async () => {
       try {
@@ -61,28 +61,6 @@ const GreenSpaceDetail = () => {
     fetchPlants();
     fetchGreenSpace();
   }, [id, API_BASE_URL]);
-  
-  // Mock data for the green space
-  // const greenSpace = {
-  //   space_id: id,
-  //   space_name: "Lake Gardens (Taman Tasik Perdana)",
-  //   space_district: "Kuala Lumpur",
-  //   space_address: "Jalan Kebun Bunga, Tasik Perdana, 55100 Kuala Lumpur",
-  //   space_description_content: "Lake Gardens is a 92-hectare park established in 1888, featuring scenic landscapes, a deer park, butterfly park, and bird park. Visitors can enjoy jogging tracks, picnic areas, and beautifully maintained gardens with exotic plants. Perfect for families and nature lovers looking for a peaceful retreat in the heart of Kuala Lumpur.",
-  //   space_free: "FALSE",
-  //   space_fee: 12,
-  //   space_business_hours: "Daily: 7:00 - 20:00",
-  //   space_family: "TRUE",
-  //   space_family_content: "Playground, Picnic Areas, Child-friendly Pathways, Family Restrooms",
-  //   space_amenities: "TRUE",
-  //   space_amenities_content: "Public Restrooms, Drinking Fountains, Sheltered Rest Areas, Information Boards, Trash Bins",
-  //   space_accessible: "TRUE",
-  //   space_accessible_content: "Wheelchair Accessible Paths, Disabled Parking, Accessible Restrooms",
-  //   space_pet: "TRUE",
-  //   space_pet_content: "Dog-Friendly Areas, Pet Waste Stations, Leash-Free Zones",
-  //   space_latitude: 3.1478,
-  //   space_longitude: 101.6881
-  // };
 
   const scrollToMap = () => {
     document.getElementById('location-map').scrollIntoView({ behavior: 'smooth' });
@@ -90,13 +68,18 @@ const GreenSpaceDetail = () => {
 
   // Leaflet map initialization
   useEffect(() => {
+    // Check if greenSpace data and coordinates are available
+    if (!greenSpace || !greenSpace.space_latitude || !greenSpace.space_longitude) {
+      return;
+    }
+    
     // Check if the mapRef is available and the container exists
     if (mapRef.current && !mapRef.current._leaflet_id) {
       // Dynamically import Leaflet to avoid SSR issues
       import('leaflet').then(L => {
         // Initialize the map
         const map = L.map(mapRef.current).setView(
-          [greenSpace.space_latitude, greenSpace.space_longitude], 
+          [parseFloat(greenSpace.space_latitude), parseFloat(greenSpace.space_longitude)], 
           15 // zoom level
         );
 
@@ -108,8 +91,8 @@ const GreenSpaceDetail = () => {
 
         // Add a marker for the green space location
         const marker = L.marker([
-          greenSpace.space_latitude, 
-          greenSpace.space_longitude
+          parseFloat(greenSpace.space_latitude), 
+          parseFloat(greenSpace.space_longitude)
         ]).addTo(map);
 
         // Add a popup to the marker
@@ -124,7 +107,42 @@ const GreenSpaceDetail = () => {
         };
       });
     }
-  }, [greenSpace.space_latitude, greenSpace.space_longitude, greenSpace.space_name, greenSpace.space_address]);
+  }, [greenSpace]);
+
+  // Helper function to check if a feature is enabled
+  const isFeatureEnabled = (value) => {
+    return value === "TRUE" || value === true;
+  };
+
+  // Function to safely split comma-separated strings
+  const safeSplit = (str) => {
+    if (!str) return [];
+    return str.split(', ');
+  };
+
+  if (loading) {
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-8 flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="text-center text-red-500 p-6 bg-red-50 rounded-lg">
+          <p>Failed to load details: {error}</p>
+          <button 
+            className="mt-4 px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+            onClick={() => window.location.reload()}
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -137,10 +155,10 @@ const GreenSpaceDetail = () => {
       </div>
       {/* Header */}
       <div className="mb-8 bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg shadow-sm">
-        <h1 className="text-4xl font-bold text-gray-800 mb-3">{greenSpace.space_name}</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-3">{greenSpace.space_name || 'Green Space'}</h1>
         <div className="flex items-center text-gray-600">
           <MapPin className="w-5 h-5 mr-2 text-green-600" />
-          <span className="text-lg">{greenSpace.space_address}</span>
+          <span className="text-lg">{greenSpace.space_address || 'Location information unavailable'}</span>
         </div>
         <button 
           className="mt-4 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-md"
@@ -166,7 +184,7 @@ const GreenSpaceDetail = () => {
       {/* About Section */}
       <div className="mb-10 bg-white p-6 rounded-lg shadow-sm">
         <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b border-gray-200 pb-2">About this green space</h2>
-        <p className="text-gray-700 mb-8 text-lg leading-relaxed">{greenSpace.space_description_content}</p>
+        <p className="text-gray-700 mb-8 text-lg leading-relaxed">{greenSpace.space_description_content || 'No description available.'}</p>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Opening Hours */}
@@ -174,7 +192,7 @@ const GreenSpaceDetail = () => {
             <Clock className="w-6 h-6 mr-4 text-green-600 mt-1 flex-shrink-0" />
             <div>
               <h3 className="font-medium text-gray-800 text-lg">Opening Hours</h3>
-              <p className="text-gray-600 mt-1">{greenSpace.space_business_hours}</p>
+              <p className="text-gray-600 mt-1">{greenSpace.space_business_hours || 'Not specified'}</p>
             </div>
           </div>
           
@@ -183,10 +201,12 @@ const GreenSpaceDetail = () => {
             <Ticket className="w-6 h-6 mr-4 text-green-600 mt-1 flex-shrink-0" />
             <div>
               <h3 className="font-medium text-gray-800 text-lg">Entrance Fee</h3>
-              {greenSpace.space_free === "TRUE" ? (
+              {isFeatureEnabled(greenSpace.space_free) ? (
                 <p className="text-green-600 font-medium mt-1">Free</p>
               ) : (
-                <p className="text-gray-600 mt-1">RM {greenSpace.space_fee.toFixed(2)}</p>
+                <p className="text-gray-600 mt-1">
+                  {greenSpace.space_fee ? `RM ${parseFloat(greenSpace.space_fee).toFixed(2)}` : 'Paid entry'}
+                </p>
               )}
             </div>
           </div>
@@ -198,7 +218,7 @@ const GreenSpaceDetail = () => {
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-2">Amenities & Features</h2>
         
         {/* General Amenities */}
-        {greenSpace.space_amentities === "TRUE" && (
+        {isFeatureEnabled(greenSpace.space_amentities) && (
           <div className="mb-8">
             <div className="flex items-center mb-4 bg-green-50 p-3 rounded-lg">
               <ListChecks className="w-6 h-6 mr-3 text-green-600" />
@@ -206,7 +226,7 @@ const GreenSpaceDetail = () => {
             </div>
             <div className="ml-12">
               <ul className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {greenSpace.space_amentities_content.split(', ').map((item, index) => (
+                {safeSplit(greenSpace.space_amentities_content).map((item, index) => (
                   <li key={index} className="flex items-center text-gray-700 bg-gray-50 p-2 rounded-md hover:bg-gray-100 transition-colors">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-2 flex-shrink-0"></span>
                     {item}
@@ -225,7 +245,7 @@ const GreenSpaceDetail = () => {
             </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Family-Friendly Card */}
-            {greenSpace.space_family === "TRUE" && (
+            {isFeatureEnabled(greenSpace.space_family) && (
               <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 transform">
                 <div className="bg-gradient-to-r from-red-200 to-red-300 p-4 flex flex-col items-center">
                   <div className="bg-white p-3 rounded-full mb-2">
@@ -235,7 +255,7 @@ const GreenSpaceDetail = () => {
                 </div>
                 <div className="p-5">
                   <ul className="space-y-3">
-                    {greenSpace.space_family_content.split(', ').map((item, index) => (
+                    {safeSplit(greenSpace.space_family_content).map((item, index) => (
                       <li key={index} className="flex items-center text-gray-700">
                         <span className="w-2 h-2 bg-red-300 rounded-full mr-3 flex-shrink-0"></span>
                         {item}
@@ -247,7 +267,7 @@ const GreenSpaceDetail = () => {
             )}
             
             {/* Accessible Card */}
-            {greenSpace.space_accessible === "TRUE" && (
+            {isFeatureEnabled(greenSpace.space_accessible) && (
               <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 transform">
                 <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 p-4 flex flex-col items-center">
                   <div className="bg-white p-3 rounded-full mb-2">
@@ -257,7 +277,7 @@ const GreenSpaceDetail = () => {
                 </div>
                 <div className="p-5">
                   <ul className="space-y-3">
-                    {greenSpace.space_accessible_content.split(', ').map((item, index) => (
+                    {safeSplit(greenSpace.space_accessible_content).map((item, index) => (
                       <li key={index} className="flex items-center text-gray-700">
                         <span className="w-2 h-2 bg-indigo-300 rounded-full mr-3 flex-shrink-0"></span>
                         {item}
@@ -269,7 +289,7 @@ const GreenSpaceDetail = () => {
             )}
 
             {/* Pet-Friendly Card */}
-            {greenSpace.space_pet === "TRUE" && (
+            {isFeatureEnabled(greenSpace.space_pet) && (
               <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 transform">
                 <div className="bg-gradient-to-r from-amber-200 to-amber-300 p-4 flex flex-col items-center">
                   <div className="bg-white p-3 rounded-full mb-2">
@@ -279,7 +299,7 @@ const GreenSpaceDetail = () => {
                 </div>
                 <div className="p-5">
                   <ul className="space-y-3">
-                    {greenSpace.space_pet_content.split(', ').map((item, index) => (
+                    {safeSplit(greenSpace.space_pet_content).map((item, index) => (
                       <li key={index} className="flex items-center text-gray-700">
                         <span className="w-2 h-2 bg-amber-300 rounded-full mr-3 flex-shrink-0"></span>
                         {item}
@@ -305,7 +325,7 @@ const GreenSpaceDetail = () => {
       {/* Plants Section */}
       <div className="mb-10 bg-white p-6 rounded-lg shadow-sm mt-12">
         <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-8 text-center">
-          Most Observed Plants in {greenSpace.space_name}
+          Most Observed Plants in {greenSpace.space_name || 'This Area'}
         </h2>
         
         {loading ? (
