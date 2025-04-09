@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Calendar, Accessibility, Dog, Dumbbell, CircleArrowLeft} from 'lucide-react';
 import Papa from 'papaparse';
 
@@ -25,32 +26,41 @@ const GreenMap = () => {
   const API_BASE_URL = 'http://165.22.96.250:3000';
 
   useEffect(() => {
-    if (mapRef.current && !mapRef.current._leaflet_id) {
-      import('leaflet').then(L => {
-        const map = L.map(mapRef.current).setView(
-          [3.1390, 101.6869], 11
-        );
-        setInteractiveMap(map);
+    const fetchSpaces = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${API_BASE_URL}/spaces`);
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch spaces: ${response.status} ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        if (mapRef.current && !mapRef.current._leaflet_id) {
+          import('leaflet').then(L => {
+            const map = L.map(mapRef.current).setView(
+              [3.1390, 101.6869], 11
+            );
+            setInteractiveMap(map);
+    
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+    
+            mapRef.current = map;
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
+            populateDistricts(data);
+            populateGreenSpaces(data, map);
+          }
+        )};
+      } catch (err) {
+        console.error('Error fetching spaces:', err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
 
-        mapRef.current = map;
-
-        fetch('/space_info.csv')
-        .then(response => response.text())
-        .then(text => {
-          Papa.parse(text, {
-            header: true,
-            complete: (result) => {
-              populateDistricts(result.data);
-              populateGreenSpaces(result.data, map);
-            },
-          });
-        });
-      });
-    }
+    fetchSpaces();
 
     return () => {
       if (mapRef.current) {
@@ -58,7 +68,7 @@ const GreenMap = () => {
         mapRef.current = null;
       }
     };
-  }, []);
+  }, [API_BASE_URL]);
 
   const populateDistricts = (data) => {
     const districtList = data.map((row) => row['space_district']);
@@ -67,23 +77,22 @@ const GreenMap = () => {
   };
 
   const populateGreenSpaces = (data, map) => {
-    // doesn't include image
     const greenSpacesList = data.map((row) => ({
       id: row["space_id"],
       name: row["space_name"],
       district: row["space_district"],
       address: row["space_address"],
       description: row["space_description_content"],
-      isFree: row["space_free"] === "TRUE",
+      isFree: row["space_free"] === "TRUE" || row["space_free"] === true,
       fee: row["space_fee"],
       operationTime: row["space_business_hours"],
-      isFamilyFree: row["space_family"] === "TRUE",
+      isFamilyFree: row["space_family"] === "TRUE" || row["space_family"] === tru,
       familyContent: row["space_family_content"],
-      hasAmenities: row["space_amentities"] === "TRUE",
+      hasAmenities: row["space_amenities"] === "TRUE" || row["space_amenities"] === tru,
       features: row["space_amentities_content"].split(', '),
-      isAccessible: row["space_accessible"] === "TRUE",
+      isAccessible: row["space_accessible"] === "TRUE" || row["space_accessible"] === tru,
       accessibleContent: row["space_accessible_content"],
-      isPetFree: row["space_pet"] === "TRUE",
+      isPetFree: row["space_pet"] === "TRUE" || row["space_pet"] === tru,
       petContent: row["space_pet_content"],
       latitude: parseFloat(row["space_latitude"]),
       longitude: parseFloat(row["space_longitude"]) 
