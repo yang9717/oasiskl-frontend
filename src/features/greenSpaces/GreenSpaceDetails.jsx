@@ -11,7 +11,7 @@ const GreenSpaceDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  const API_BASE_URL = 'http://oasiskl.tech:3000';
+  const API_BASE_URL = '/api';
   // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {

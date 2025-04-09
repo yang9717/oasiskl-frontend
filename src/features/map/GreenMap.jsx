@@ -23,7 +23,7 @@ const GreenMap = () => {
   const spacesPerPage = 5;
 
   // API base URL
-  const API_BASE_URL = 'http://oasiskl.tech:3000';
+  const API_BASE_URL = '/api';
 
   useEffect(() => {
     const fetchSpaces = async () => {
