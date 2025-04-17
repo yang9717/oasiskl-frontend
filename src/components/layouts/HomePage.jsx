@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Map, Leaf, Home, MapPin, BookOpen, Users } from 'lucide-react';
-import klmap from '../../assets/homepage/kl-map.png';
-import heroImage from '../../assets/homepage/homepagehero55.jpg';
 
 const HomePage = () => {
   // Scroll to top when the component mounts
@@ -13,7 +11,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[600px] bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
+      <section className="relative h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('/assets/homepage/homepagehero55.jpg')" }}>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-100"></div>
         {/* Simplified container structure */}
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
@@ -25,7 +23,7 @@ const HomePage = () => {
               <Link
                 to="/map"
                 className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
-                Discover Green Spaces
+                Discover Green Space
               </Link>
               <div className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
                 More to come...
@@ -89,7 +87,7 @@ const HomePage = () => {
             {/* Map Image */}
             <div className="md:w-1/2 mt-8 md:mt-0">
                 <img 
-                  src={klmap}
+                  src="/assets/homepage/kl-map.png"
                   alt="Map of Kuala Lumpur regions" 
                   className="w-full h-auto scale-70"
                 />

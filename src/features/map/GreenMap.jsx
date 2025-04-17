@@ -1,8 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Accessibility, Dog, CircleArrowLeft} from 'lucide-react';
+import useTitle from '../../hooks/useTitle';
 
 const GreenMap = () => {
+
+  useTitle('OasisKL - Green Map');
+  // Scroll to top when the component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Function to handle back navigation
+  const handleBackToSearch = () => {
+    // Navigate back to the search page
+    window.history.back();
+    
+    // Add a small delay to ensure navigation begins before scrolling
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+  };
+
   // State for filters
   const [districts, setDistricts] = useState([]);
   const [greenSpaces, setGreenSpaces] = useState([]);
@@ -112,7 +131,11 @@ const GreenMap = () => {
         import('leaflet').then(L => {
           const marker = L.marker([lat, lng])
           .addTo(map)
-          .bindPopup(`<strong>${gs.name}</strong><br>${gs.address}`);
+          .bindPopup(`<strong>${gs.name}</strong><br>${gs.address}`)
+          .on('click', () => {
+            // Zoom to location when marker is clicked, zoom level 16 for detailed view
+            map.setView([lat, lng], 16);
+          });
           mapMarkersRef.current.push(marker);
         });
       };
@@ -203,9 +226,9 @@ const GreenMap = () => {
           <div className="container mx-auto py-20 px-4">
             <div className="max-w-4xl">
               <h1 className="text-5xl font-bold text-white mb-4">
-                Discover Green Spaces in <span className="text-orange-500">Kuala Lumpur</span>
+                <span className="whitespace-nowrap">Discover Green Spaces in <span className="text-orange-500">Kuala&nbsp;Lumpur</span></span>
                 <br />
-                - Find, Explore, and Enjoy!
+                <span className="whitespace-nowrap">- Find, Explore, and Enjoy!</span>
               </h1>
               <p className="text-white text-lg max-w-2xl">
                 Use OasisKL's interactive map to search for parks, nature
@@ -214,10 +237,12 @@ const GreenMap = () => {
               </p>
               {/* Navigation */}
               <div className="mb-6 mt-6">
-                <Link to={-1} className="flex items-center text-green-500 hover:text-green-700 transition-colors">
+                <button 
+                  onClick={handleBackToSearch} 
+                  className="flex items-center text-green-500 hover:text-green-700 transition-colors">
                   <CircleArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Home
-                </ Link>
+                  Back to Homepage
+                </button>
               </div>
             </div>
           </div>
@@ -318,7 +343,7 @@ const GreenMap = () => {
                 {/* Second row - Features */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Optional Features (Selet any that apply)
+                    Optional Features (Select any that apply)
                   </label>
                   <div className="flex flex-wrap gap-4">
                     {features.map((feature) => (
@@ -395,7 +420,7 @@ const GreenMap = () => {
                     >
                       <div className="md:w-1/4 h-48 md:h-auto bg-gray-200">
                         <img
-                          src={`/src/assets/space_images/${space.id}.jpg`}
+                          src={`/assets/space_images/${space.id}.jpg`}
                           alt={space.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {
@@ -426,7 +451,7 @@ const GreenMap = () => {
                               <span className="text-gray-700">
                                 {space.isFree 
                                   ? "Free entry, facilities may require charges" 
-                                  : "Paid entry"}
+                                  : `Entry Fee: RM ${space.fee}`}
                               </span>
                             </div>
                           </div>

@@ -2,14 +2,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import { useParams } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ListChecks, Users, Accessibility, Dog, Sprout, CircleArrowLeft } from 'lucide-react';
+import useTitle from '../../hooks/useTitle';
 
 const GreenSpaceDetail = () => {
+  useTitle('OasisKL - Green Space Details');
+
   const { id } = useParams();
   const mapRef = useRef(null);
   const [plants, setPlants] = useState([]);
   const [greenSpace, setGreenSpace] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Function to handle back navigation
+  const handleBackToSearch = () => {
+    // Navigate back to the search page
+    window.history.back();
+    
+    // Add a small delay to ensure navigation begins before scrolling
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+  };
   
   const API_BASE_URL = '/api';
   // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
@@ -148,10 +162,12 @@ const GreenSpaceDetail = () => {
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Navigation */}
       <div className="mb-6">
-        <Link to={-1} className="flex items-center text-green-600 hover:text-green-700 transition-colors">
+        <button 
+          onClick={handleBackToSearch} 
+          className="flex items-center text-green-500 hover:text-green-700 transition-colors">
           <CircleArrowLeft className="w-4 h-4 mr-2" />
           Back to Search
-        </ Link>
+        </button>
       </div>
       {/* Header */}
       <div className="mb-8 bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg shadow-sm">
@@ -172,7 +188,7 @@ const GreenSpaceDetail = () => {
       {/* Main Image */}
       <div className="mb-10 rounded-xl overflow-hidden h-96 shadow-lg">
         <img 
-          src={`/src/assets/space_images/${id}.jpg`} 
+          src={`/assets/space_images/${id}.jpg`} 
           alt={greenSpace.space_name} 
           className="w-full h-full object-cover" 
           onError={(e) => {
@@ -184,15 +200,32 @@ const GreenSpaceDetail = () => {
       {/* About Section */}
       <div className="mb-10 bg-white p-6 rounded-lg shadow-sm">
         <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b border-gray-200 pb-2">About this green space</h2>
-        <p className="text-gray-700 mb-8 text-lg leading-relaxed">{greenSpace.space_description_content || 'No description available.'}</p>
-        
+        <div className="min-h-0 h-auto"> {/* This wrapper ensures proper expansion */}
+          <p className="text-gray-700 mb-8 text-lg leading-relaxed">
+            {greenSpace.space_description_content || 'No description available.'}
+          </p>
+        </div>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Opening Hours */}
           <div className="flex items-start bg-gray-50 p-4 rounded-lg transition-all hover:bg-gray-100">
             <Clock className="w-6 h-6 mr-4 text-green-600 mt-1 flex-shrink-0" />
             <div>
               <h3 className="font-medium text-gray-800 text-lg">Opening Hours</h3>
-              <p className="text-gray-600 mt-1">{greenSpace.space_business_hours || 'Not specified'}</p>
+              {greenSpace.space_business_hours ? (
+                greenSpace.space_business_hours.includes(',') ? (
+                  // If hours contain commas, split and display on multiple lines
+                  greenSpace.space_business_hours.split(',').map((hours, index) => (
+                    <p key={index} className="text-gray-600 mt-1">
+                      {hours.trim()}
+                    </p>
+                  ))
+                ) : (
+                  // If it's a single line, display as is
+                  <p className="text-gray-600 mt-1">{greenSpace.space_business_hours}</p>
+                )
+              ) : (
+                <p className="text-gray-600 mt-1">Not specified</p>
+              )}
             </div>
           </div>
           
@@ -218,7 +251,7 @@ const GreenSpaceDetail = () => {
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-2">Amenities & Features</h2>
         
         {/* General Amenities */}
-        {isFeatureEnabled(greenSpace.space_amentities) && (
+        {isFeatureEnabled(greenSpace.space_amenities) && (
           <div className="mb-8">
             <div className="flex items-center mb-4 bg-green-50 p-3 rounded-lg">
               <ListChecks className="w-6 h-6 mr-3 text-green-600" />
@@ -226,7 +259,7 @@ const GreenSpaceDetail = () => {
             </div>
             <div className="ml-12">
               <ul className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {safeSplit(greenSpace.space_amentities_content).map((item, index) => (
+                {safeSplit(greenSpace.space_amenities_content).map((item, index) => (
                   <li key={index} className="flex items-center text-gray-700 bg-gray-50 p-2 rounded-md hover:bg-gray-100 transition-colors">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-2 flex-shrink-0"></span>
                     {item}
@@ -354,7 +387,7 @@ const GreenSpaceDetail = () => {
                   {/* Plant Image */}
                   <div className="h-52 bg-gray-200 overflow-hidden">
                     <img 
-                      src={`/src/assets/plants_images/${plant.plant_id}.jpg`}
+                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
                       alt={plant.plant_name}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                       onError={(e) => {
@@ -390,7 +423,7 @@ const GreenSpaceDetail = () => {
                   {/* Plant Image */}
                   <div className="h-52 bg-gray-200 overflow-hidden">
                     <img 
-                      src={`/src/assets/plants_images/${plant.plant_id}.jpg`}
+                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
                       alt={plant.plant_name}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                       onError={(e) => {

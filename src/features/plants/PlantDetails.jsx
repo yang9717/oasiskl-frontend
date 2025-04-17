@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CircleArrowLeft, Droplet, Sun, Scissors, MapPin, Fence, SearchCheck } from 'lucide-react';
+import useTitle from '../../hooks/useTitle';
 
 const PlantDetails = () => {
+  useTitle('OasisKL - Plant Details');
+
   const { id } = useParams();
   const [plant, setPlant] = useState(null);
   const [otherSpaces, setOtherSpaces] = useState([]);
@@ -78,7 +81,7 @@ const PlantDetails = () => {
         {/* Plant Image Section */}
         <div className="bg-gray-100 rounded-xl overflow-hidden shadow-lg">
           <img 
-            src={`/src/assets/plants_images/${id}.jpg`}
+            src={`/assets/plants_images/${id}.jpg`}
             alt={plant.plant_name} 
             className="w-full h-[400px] object-contain p-4"
             onError={(e) => {
@@ -190,7 +193,7 @@ const PlantDetails = () => {
               >
                 <div className="h-48 bg-gray-100">
                   <img 
-                    src={`/src/assets/space_images/${space.space_id}.jpg`}
+                    src={`/assets/space_images/${space.space_id}.jpg`}
                     alt={`Green Space ${space.space_id}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
