@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../../assets/logo/logo-white.png';
+import logoImage from '/assets/logo/logo-white.png';
 
 const Footer = () => {
   return (
     <footer style={{ 
       backgroundColor: '#222',
       color: 'white',
-      padding: '40px 0',
-      marginTop: '40px'
+      padding: '40px 0'
     }}>
       <div style={{ 
         maxWidth: '1200px', 
@@ -62,6 +61,12 @@ const Footer = () => {
             </li>
             <li style={{ marginBottom: '10px' }}>
               <Link to="/map" style={{ color: '#ccc', textDecoration: 'none', transition: 'color 0.3s' }}>Discover Green Space</Link>
+            </li>
+            <li style={{ marginBottom: '10px' }}>
+              <Link to="/care-guides" style={{ color: '#ccc', textDecoration: 'none', transition: 'color 0.3s' }}>Grow Your Green Corner</Link>
+            </li>
+            <li style={{ marginBottom: '10px' }}>
+              <Link to="/gallery" style={{ color: '#ccc', textDecoration: 'none', transition: 'color 0.3s' }}>Plant Gallery</Link>
             </li>
           </ul>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../../assets/logo/logo-white.png';
+import logoImage from '/assets/logo/logo-white.png';
 
 const Header = () => {
   return (
@@ -37,6 +37,8 @@ const Header = () => {
         }}>
           <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link></li>
           <li><Link to="/map" style={{ color: 'white', textDecoration: 'none' }}>Discover Green Space</Link></li>
+          <li><Link to="/care-guides" style={{ color: 'white', textDecoration: 'none' }}>Grow Your Green Corner</Link></li>
+          <li><Link to="/gallery" style={{ color: 'white', textDecoration: 'none' }}>Plant Gallery</Link></li>
         </ul>
       </nav>
     </header>
