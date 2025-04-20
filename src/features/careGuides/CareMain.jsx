@@ -289,7 +289,7 @@ const CareMain = () => {
                 </p>
                 
                 <a 
-                  href="/gallery" 
+                  href="/gallery?suitability=Indoor%20friendly" 
                   className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-full transition-colors shadow-md"
                 >
                   Explore Indoor Plant Gallery
