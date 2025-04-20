@@ -11,7 +11,10 @@ const HydroponicGuide = () => {
     step1: false,
     step2: false,
     step3: false,
-    step4: false
+    step4: false,
+    step5: false,
+    step6: false,
+    step7: false
   });
   
   // References to step elements for scrolling
@@ -19,7 +22,10 @@ const HydroponicGuide = () => {
     step1: useRef(null),
     step2: useRef(null),
     step3: useRef(null),
-    step4: useRef(null)
+    step4: useRef(null),
+    step5: useRef(null),
+    step6: useRef(null),
+    step7: useRef(null)
   };
 
   // State for managing media info popups
@@ -218,6 +224,27 @@ const HydroponicGuide = () => {
           >
             <Calendar className="mr-2 h-4 w-4" />
             Planting Schedule
+          </button>
+          <button 
+            onClick={() => scrollToStep('step5')}
+            className="px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition-colors flex items-center"
+          >
+            <Leaf className="mr-2 h-4 w-4" />
+            Seeds & Seedlings
+          </button>
+          <button 
+            onClick={() => scrollToStep('step6')}
+            className="px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition-colors flex items-center"
+          >
+            <Zap className="mr-2 h-4 w-4" />
+            Nutrient Management
+          </button>
+          <button 
+            onClick={() => scrollToStep('step7')}
+            className="px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition-colors flex items-center"
+          >
+            <CloudRain className="mr-2 h-4 w-4" />
+            Pest & Disease
           </button>
         </div>
       </div>
@@ -1564,12 +1591,1329 @@ const HydroponicGuide = () => {
           </div>
         )}
       </div>
+
+      {/* Step 5: Seeds and Seedlings */}
+      <div ref={stepRefs.step5} id="step5" className="mb-8">
+        <div 
+          className="bg-green-600 text-white p-4 rounded-t-lg flex justify-between items-center cursor-pointer"
+          onClick={() => toggleStep('step5')}
+        >
+          <h3 className="text-xl font-semibold">Step 5: Handling Seeds and Seedlings</h3>
+          {openSteps.step5 ? <ChevronUp /> : <ChevronDown />}
+        </div>
+        
+        {openSteps.step5 && (
+          <div className="border border-gray-200 border-t-0 rounded-b-lg p-8 bg-white shadow-sm">
+            <div className="mb-8">
+              <div className="md:flex items-center gap-6 mb-6">
+                <div className="md:w-3/3">
+                  <h4 className="text-xl font-medium text-green-600 mb-4">Getting Started with <span className="text-green-500 font-semibold">Seeds</span></h4>
+                  <p className="text-gray-700 leading-relaxed">
+                    Unlike traditional gardening, hydroponics gives you precise control over the growing environment from day one. 
+                    Properly starting your seeds ensures stronger plants and better harvests in your hydroponic system.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Seed Starting Grid */}
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">1</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Select the Right Spot</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Choose a bright, well-ventilated indoor space with <span className="font-medium">stable temperature</span> and access to electricity. Keep it away from pets or areas with potential spills. In KL's climate, ensure it's not overly humid or enclosed.
+                  </p>
+                  <div className="p-3 rounded-lg">
+                    <h6 className="font-medium text-sm text-green-700 mb-1">Key Points:</h6>
+                    <ul className="text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Stable environment (22-28°C)</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Access to electricity for pumps/lights</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Protected from direct sunlight</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">2</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Sow with Care</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Plant seeds in rockwool, coco plugs, or sponge cubes. Place them gently into pre-moistened media. No soil needed! Cover lightly with humidity domes or plastic to keep them moist during germination.
+                  </p>
+                  <div className="p-3 rounded-lg">
+                    <h6 className="font-medium text-sm text-green-700 mb-1">Seed Placement:</h6>
+                    <ul className="text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Small seeds: place on surface</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Medium seeds: 2-3mm deep</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Label varieties and date planted</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">3</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Mist, Don't Drench</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Use a spray bottle or mister to keep the growing medium moist—never soggy. Avoid pouring water directly over the seeds. KL's humidity helps, but don't let the medium dry out or sit in standing water.
+                  </p>
+                  <div className="bg-yellow-50 p-3 rounded-lg border-l-4 border-yellow-300">
+                    <p className="text-sm text-yellow-800">
+                      <strong>Warning:</strong> Overwatering is the No.1 cause of seed failure in hydroponics. In Malaysia's humid climate, you'll need less water than you might expect.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">4</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Provide Light & Warmth</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Use LED grow lights for 12-16 hours a day. Ensure a consistent temperature between 22-28°C. Avoid placing seed trays near windows where direct sun may overheat or dry out your seedlings.
+                  </p>
+                  <div className="p-3 rounded-lg">
+                    <h6 className="font-medium text-sm text-green-700 mb-1">Light Distance:</h6>
+                    <ul className="text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>LED: 15-30cm above seedlings</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Fluorescent: 10-15cm above</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">5</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Transplant to Hydroponics</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Once the roots emerge and the first true leaves appear, gently move seedlings (with the plug) into your chosen hydroponic system. Handle with care—don't disturb young roots.
+                  </p>
+                  <div className="p-3 rounded-lg">
+                    <h6 className="font-medium text-sm text-green-700 mb-1">When to Transplant:</h6>
+                    <ul className="text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>2-3 sets of true leaves</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Roots visible through medium</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span>Plant height: 5-10cm</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-5 border-b border-gray-100 bg-green-50">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-bold">6</span>
+                    </div>
+                    <h5 className="text-lg font-medium text-green-700">Acclimate to Airflow</h5>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 mb-4">
+                    Before full setup, slowly introduce airflow (fans or open windows) to strengthen seedlings and prevent mold, especially in KL's humid climate.
+                  </p>
+                  <div className="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-300">
+                    <p className="text-sm text-blue-800">
+                      <strong>Malaysian Tip:</strong> In KL's humidity, gentle air circulation is crucial for preventing damping-off disease, which commonly affects seedlings.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+      {/* Common Seedling Problems */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm mb-8">
+        <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+                <div className="p-2 bg-gray-100 rounded-full mr-2">
+                  <Layers className="h-5 w-5 text-gray-600" />
+                </div>
+                Common Seedling Issues in Malaysian Hydroponic Systems
+              </h4>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Problem</th>
+                <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Symptoms</th>
+                <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Likely Cause</th>
+                <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border-b border-gray-200 font-medium">Leggy Seedlings</td>
+                <td className="p-3 border-b border-gray-200">Tall, thin stems; weak structure</td>
+                <td className="p-3 border-b border-gray-200">Insufficient light</td>
+                <td className="p-3 border-b border-gray-200">Move lights closer; increase light duration</td>
+              </tr>
+              <tr>
+                <td className="p-3 border-b border-gray-200 font-medium">Damping Off</td>
+                <td className="p-3 border-b border-gray-200">Stems collapse at soil line; seedlings wilt</td>
+                <td className="p-3 border-b border-gray-200">Fungal infection; poor ventilation</td>
+                <td className="p-3 border-b border-gray-200">Improve airflow; use sterile media; reduce humidity</td>
+              </tr>
+              <tr>
+                <td className="p-3 border-b border-gray-200 font-medium">Yellowing Leaves</td>
+                <td className="p-3 border-b border-gray-200">Pale or yellow leaves</td>
+                <td className="p-3 border-b border-gray-200">Nutrient deficiency or excess water</td>
+                <td className="p-3 border-b border-gray-200">Check EC levels; ensure proper drainage</td>
+              </tr>
+              <tr>
+                <td className="p-3 border-b border-gray-200 font-medium">Mold Growth</td>
+                <td className="p-3 border-b border-gray-200">White or gray fuzzy patches on media or plants</td>
+                <td className="p-3 border-b border-gray-200">High humidity; poor air circulation</td>
+                <td className="p-3 border-b border-gray-200">Increase airflow; reduce watering; use fan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+          {/* Final tip box */}
+          <div className="bg-green-50 rounded-lg p-6 border border-green-100">
+            <div className="flex flex-col md:flex-row gap-5 items-center">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                <span className="text-2xl">💡</span>
+              </div>
+              <div>
+                <h4 className="text-lg font-medium text-green-700 mb-2">Success Tip for Malaysian Growers</h4>
+                <p className="text-gray-700 mb-3">
+                  For first-time hydroponic gardeners in Malaysia, try starting with fast-growing Asian greens like kangkung (water spinach) 
+                  or pak choi. They're well-adapted to our tropical climate and will give you quick satisfaction while you learn the system.
+                </p>
+                <p className="text-green-700 text-sm font-medium">
+                  Most leafy greens will be ready to harvest just 30-45 days after transplanting seedlings to your hydroponic system!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Step 6: Nutrient Management */}
+    <div ref={stepRefs.step6} id="step6" className="mb-8">
+      <div 
+        className="bg-green-600 text-white p-4 rounded-t-lg flex justify-between items-center cursor-pointer"
+        onClick={() => toggleStep('step6')}
+      >
+        <h3 className="text-xl font-semibold">Step 6: Nutrient Management for Hydroponics</h3>
+        {openSteps.step6 ? <ChevronUp /> : <ChevronDown />}
+      </div>
+      
+      {openSteps.step6 && (
+        <div className="border border-gray-200 border-t-0 rounded-b-lg p-8 bg-white shadow-sm">
+          <div className="mb-8">
+            <div className="md:flex items-center gap-6 mb-6">
+              <div className="md:w-3/3">
+                <h4 className="text-xl font-medium text-green-600 mb-4">Understanding <span className="text-green-500 font-semibold">Hydroponic Nutrients</span></h4>
+                <p className="text-gray-700 leading-relaxed">
+                  In hydroponics, plants rely completely on you for their nutrition. Unlike soil gardening, there's no natural ecosystem 
+                  providing nutrients, so getting the mix right is crucial for healthy growth and abundant harvests.
+                </p>
+                <p className="text-gray-700 mt-3 leading-relaxed">
+                  For Malaysian hydroponic gardeners, understanding the basics of plant nutrition and how to maintain the 
+                  correct balance in our tropical climate will set you up for success.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Nutrient types */}
+          <div className="mb-10">
+            <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+              <div className="p-2 bg-green-100 rounded-full mr-2">
+                <Zap className="h-5 w-5 text-green-600" />
+              </div>
+              Types of Hydroponic Nutrients
+            </h4>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                <div className="p-5 bg-green-50 border-b border-gray-200">
+                  <h5 className="text-xl font-semibold text-green-700">Organic Nutrients</h5>
+                  <p className="text-sm text-gray-600 mt-1">Natural-based solutions</p>
+                </div>
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h6 className="font-medium text-gray-700 mb-2">Main Features:</h6>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-gray-700">Derived from natural sources (seaweed, fish, compost)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-gray-700">Better for beneficial microbial life</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span className="text-gray-700">Slower release; gentler on plants</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <h6 className="font-medium text-gray-700 mb-2">Considerations in Malaysia:</h6>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">May break down faster in tropical heat</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">Can cause clogging in warmer systems</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">Requires more frequent monitoring of solution</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="p-3 bg-green-50 rounded-lg">
+                    <p className="text-sm text-green-700">
+                      <strong>Best for:</strong> DWC systems with good filtration, wick systems, and growers preferring natural approaches.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                <div className="p-5 bg-blue-50 border-b border-gray-200">
+                  <h5 className="text-xl font-semibold text-blue-700">Mineral/Chemical Nutrients</h5>
+                  <p className="text-sm text-gray-600 mt-1">Synthesized for precision</p>
+                </div>
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h6 className="font-medium text-gray-700 mb-2">Main Features:</h6>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">✓</span>
+                        <span className="text-gray-700">Precisely formulated for different growth stages</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">✓</span>
+                        <span className="text-gray-700">Immediately available to plants</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-blue-500 mr-2">✓</span>
+                        <span className="text-gray-700">More stable in solution over time</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <h6 className="font-medium text-gray-700 mb-2">Considerations in Malaysia:</h6>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">Solution concentration changes faster with evaporation in heat</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">Risk of nutrient burn if not properly diluted</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-yellow-500 mr-2">•</span>
+                        <span className="text-gray-700">May require EC/TDS meter for precision</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="p-3 bg-blue-50 rounded-lg">
+                    <p className="text-sm text-blue-700">
+                      <strong>Best for:</strong> Most commercial hydroponic systems, beginners who want reliable results, and precise growers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* NPK and nutrient measuring */}
+          <div className="mb-10">
+            <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+                <div className="p-2 bg-gray-100 rounded-full mr-2">
+                  <Layers className="h-5 w-5 text-gray-600" />
+                </div>
+                Understanding N-P-K and Micronutrients
+            </h4>
+
+            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm mb-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="md:w-1/3">
+                  <h5 className="font-medium text-gray-800 mb-3">The Big Three (N-P-K)</h5>
+                  <div className="space-y-3">
+                    <div className="p-3 bg-green-50 rounded-lg">
+                      <h6 className="font-medium text-green-700">Nitrogen (N)</h6>
+                      <p className="text-sm text-gray-600">For leaf growth and green color. High demand in leafy vegetables.</p>
+                    </div>
+                    <div className="p-3 bg-amber-50 rounded-lg">
+                      <h6 className="font-medium text-amber-700">Phosphorus (P)</h6>
+                      <p className="text-sm text-gray-600">For root development, flowering, and fruiting.</p>
+                    </div>
+                    <div className="p-3 bg-blue-50 rounded-lg">
+                      <h6 className="font-medium text-blue-700">Potassium (K)</h6>
+                      <p className="text-sm text-gray-600">For overall plant health, disease resistance, and fruit quality.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="md:w-2/3">
+                  <h5 className="font-medium text-gray-800 mb-3">Essential Micronutrients</h5>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Calcium (Ca)</h6>
+                      <p className="text-xs text-gray-600">Cell wall structure; prevents blossom-end rot</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Magnesium (Mg)</h6>
+                      <p className="text-xs text-gray-600">Core component of chlorophyll; affects photosynthesis</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Iron (Fe)</h6>
+                      <p className="text-xs text-gray-600">Chlorophyll production; often deficient in hydroponics</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Manganese (Mn)</h6>
+                      <p className="text-xs text-gray-600">Enzyme activator; aids in photosynthesis</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Zinc (Zn)</h6>
+                      <p className="text-xs text-gray-600">Growth hormone regulation; seed development</p>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h6 className="font-medium text-gray-700">Boron (B)</h6>
+                      <p className="text-xs text-gray-600">Cell division; pollination; fruit development</p>
+                    </div>
+                  </div>
+                  <div className="mt-3 p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-300">
+                    <p className="text-sm text-yellow-800">
+                      <strong>Malaysian Tip:</strong> In our tropical climate with high humidity, calcium and magnesium are especially important. 
+                      Consider supplementing these if using rainwater or RO water in your system.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Measurement tools */}
+          <div className="mb-10">
+            <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+              <div className="p-2 bg-gray-100 rounded-full mr-2">
+                <Thermometer className="h-5 w-5 text-gray-600" />
+              </div>
+              Essential Measurement Tools
+            </h4>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-blue-500 font-bold">pH</span>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-800">pH Meter/Strips</h5>
+                    <p className="text-xs text-gray-500">Measures acidity/alkalinity</p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Aim for a pH between 5.5-6.5 for most plants. KL tap water tends to be slightly alkaline (pH 7-8), 
+                  so you'll likely need pH down solution.
+                </p>
+                <div className="bg-blue-50 p-3 rounded-lg">
+                  <h6 className="text-sm font-medium text-blue-700 mb-1">Recommended Range:</h6>
+                  <ul className="text-xs space-y-1 text-gray-600">
+                    <li>Leafy greens: pH 5.5-6.5</li>
+                    <li>Fruiting plants: pH 6.0-6.5</li>
+                    <li>Herbs: pH 5.5-6.0</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-green-500 font-bold">EC</span>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-800">EC/TDS Meter</h5>
+                    <p className="text-xs text-gray-500">Measures nutrient concentration</p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Electrical Conductivity (EC) or Total Dissolved Solids (TDS) meters help you maintain the right 
+                  nutrient strength. Critical in Malaysia's heat where water evaporates quickly.
+                </p>
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <h6 className="text-sm font-medium text-green-700 mb-1">Target EC Levels:</h6>
+                  <ul className="text-xs space-y-1 text-gray-600">
+                    <li>Seedlings: 0.8-1.0 mS/cm</li>
+                    <li>Leafy greens: 1.0-1.4 mS/cm</li>
+                    <li>Fruiting plants: 1.8-2.2 mS/cm</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-amber-500 font-bold">°C</span>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-800">Thermometer</h5>
+                    <p className="text-xs text-gray-500">Monitors solution temperature</p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Nutrient solution temperature affects oxygen levels and nutrient uptake. In KL's climate, 
+                  keeping temperatures below 26°C is ideal but challenging.
+                </p>
+                <div className="bg-amber-50 p-3 rounded-lg">
+                  <h6 className="text-sm font-medium text-amber-700 mb-1">Temperature Management:</h6>
+                  <ul className="text-xs space-y-1 text-gray-600">
+                    <li>Ideal range: 18-24°C</li>
+                    <li>Avoid exceeding: 28°C</li>
+                    <li>Use shade cloth or insulation to reduce heat</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Nutrient maintenance steps */}
+          <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm mb-8">
+            <div className="p-5 bg-green-50 border-b border-gray-200">
+              <h4 className="text-lg font-medium text-green-700">6 Steps to Perfect Nutrient Management</h4>
+              <p className="text-sm text-gray-600">A systematic approach for Malaysian hydroponic gardeners</p>
+            </div>
+            
+            <div className="p-6">
+              <ol className="space-y-6">
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">1</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Assess your water quality</h5>
+                    <p className="text-gray-600 text-sm">
+                      Test your water source (tap, filtered, or rainwater) to understand its baseline pH and mineral content. 
+                      KL tap water typically contains chlorine and has a pH around 7.5, which needs adjustment.
+                    </p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">2</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Choose appropriate nutrients</h5>
+                    <p className="text-gray-600 text-sm">
+                      Select nutrients designed for hydroponics—not general garden fertilizers. For beginners, a two-part system 
+                      (grow + bloom) or an all-purpose hydroponic nutrient is simplest. Look for formulations designed for tropical climates if available.
+                    </p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">3</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Mix precisely and separately</h5>
+                    <p className="text-gray-600 text-sm">
+                      Always add nutrients to water (not water to nutrients). For multi-part systems, add each part separately 
+                      with thorough mixing in between. Pre-dissolve powdered nutrients in a small amount of warm water first.
+                    </p>
+                    <div className="mt-2 p-3 bg-yellow-50 rounded-lg text-xs text-yellow-800 border-l-4 border-yellow-300">
+                      <strong>Important:</strong> Never mix concentrated nutrient parts together before adding to water—this can cause nutrient lockout.
+                    </div>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">4</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Adjust pH after adding nutrients</h5>
+                    <p className="text-gray-600 text-sm">
+                      After mixing nutrients, check and adjust the pH using pH up/down solutions. Make small adjustments and 
+                      wait 15-30 minutes before measuring again. pH affects nutrient availability dramatically.
+                    </p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">5</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Monitor regularly in Malaysian climate</h5>
+                    <p className="text-gray-600 text-sm">
+                      In KL's heat, check your nutrient solution every 2-3 days. Water evaporates faster than nutrients, 
+                      making the solution more concentrated over time. Top up with plain pH-adjusted water when levels drop.
+                    </p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center mr-4 shadow-sm">6</div>
+                  <div>
+                    <h5 className="font-medium text-gray-800 mb-1">Change solution completely every 1-2 weeks</h5>
+                    <p className="text-gray-600 text-sm">
+                      Replace the entire nutrient solution regularly to prevent imbalances. In Malaysia's warm climate, 
+                      do this every 7-10 days (rather than the 14 days often recommended in cooler climates).
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+          
+          {/* Malaysia-specific guidance */}
+          <div className="bg-green-50 p-6 rounded-lg border border-green-100 mb-6">
+            <h4 className="text-lg font-medium text-green-700 mb-4">Special Considerations for Malaysian Hydroponics</h4>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-2 flex items-center">
+                  <Thermometer className="h-4 w-4 mr-2 text-red-500" />
+                  Higher Ambient Temperatures
+                </h5>
+                <p className="text-sm text-gray-600">
+                  Nutrient solutions warm up faster in Malaysia, reducing oxygen content and accelerating algae growth. 
+                  Consider partially shading your reservoir or using reflective insulation. Add extra air stones for oxygenation.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-2 flex items-center">
+                  <Wind className="h-4 w-4 mr-2 text-blue-500" />
+                  High Humidity Effects
+                </h5>
+                <p className="text-sm text-gray-600">
+                  High humidity slows transpiration, reducing nutrient uptake. Use slightly lower nutrient concentrations 
+                  (EC 0.2-0.4 lower than standard recommendations) to prevent buildup in the growing medium and leaves.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-2 flex items-center">
+                  <Zap className="h-4 w-4 mr-2 text-amber-500" />
+                  Shorter Shelf Life
+                </h5>
+                <p className="text-sm text-gray-600">
+                  Nutrient concentrates degrade faster in tropical heat. Store in cool, dark places and use within 6 months 
+                  of opening. Consider smaller bottles even if more expensive per liter.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-2 flex items-center">
+                  <Droplet className="h-4 w-4 mr-2 text-green-500" />
+                  Seasonal Adaptations
+                </h5>
+                <p className="text-sm text-gray-600">
+                  During rainy season, humidity is higher—reduce nutrient concentration slightly. 
+                  During dry season, check solution levels daily as evaporation accelerates significantly.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Local nutrient shopping */}
+          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+            <h4 className="text-lg font-medium text-green-600 mb-4">Finding Hydroponic Nutrients in Malaysia</h4>
+            <p className="text-gray-700 mb-4">
+              Hydroponic nutrients are increasingly available in Malaysia, both in physical stores and online.
+              Here are some common options to consider:
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">For Beginners</h5>
+                <ul className="text-sm space-y-2">
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">A&B solutions (pre-mixed, two-part)</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">All-in-one hydroponic formulas</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Starter kits with nutrients included</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">For Intermediates</h5>
+                <ul className="text-sm space-y-2">
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Grow/Bloom specific formulas</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">CalMag supplements</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">pH adjusters and buffer solutions</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">For Advanced</h5>
+                <ul className="text-sm space-y-2">
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Individual nutrient salts for custom mixes</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Specialty supplements (silica, humic acid)</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Beneficial bacteria and enzyme products</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-300">
+              <p className="text-sm text-blue-800">
+                <strong>Shopping Tip:</strong> Popular hydroponic stores in KL include Hydro2Grow, CityFarm, and many 
+                garden supply shops in SS2, Subang, and Kepong areas. Online platforms like Shopee and Lazada also have a wide selection.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Step 7: Pest & Disease Management */}
+    <div ref={stepRefs.step7} id="step7" className="mb-8">
+      <div 
+        className="bg-green-600 text-white p-4 rounded-t-lg flex justify-between items-center cursor-pointer"
+        onClick={() => toggleStep('step7')}
+      >
+        <h3 className="text-xl font-semibold">Step 7: Pest & Disease Management</h3>
+        {openSteps.step7 ? <ChevronUp /> : <ChevronDown />}
+      </div>
+      
+      {openSteps.step7 && (
+        <div className="border border-gray-200 border-t-0 rounded-b-lg p-8 bg-white shadow-sm">
+          <div className="mb-8">
+            <div className="md:flex items-center gap-6 mb-6">
+              <div className="md:w-3/3">
+                <h4 className="text-xl font-medium text-green-600 mb-4">Protecting Your <span className="text-green-500 font-semibold">Hydroponic Garden</span></h4>
+                <p className="text-gray-700 leading-relaxed">
+                  While hydroponic systems generally have fewer pest problems than outdoor soil gardens, 
+                  they're not immune—especially in Malaysia's tropical climate where insects thrive year-round.
+                </p>
+                <p className="text-gray-700 mt-3 leading-relaxed">
+                  The enclosed, humid environment of an indoor hydroponic system can also create perfect conditions for fungal 
+                  diseases if not properly managed. Let's look at prevention and treatment approaches that work well in Malaysia.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Three core principles */}
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-5 border-b border-gray-100 bg-green-50">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-bold">1</span>
+                  </div>
+                  <h5 className="text-lg font-medium text-green-700">Keep It Clean, Not Soaked</h5>
+                </div>
+              </div>
+              <div className="p-5">
+                <h6 className="font-medium text-gray-700 mb-3">Focus on Reservoir & System Hygiene:</h6>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Regularly rinse and sanitize tanks, tubes, and net pots to avoid algae or bacterial growth. 
+                  Clear debris from the system promptly.
+                </p>
+                
+                <h6 className="font-medium text-gray-700 mb-3">Avoid Spraying Leaves Excessively:</h6>
+                <p className="text-gray-600 text-sm">
+                  Mist only when needed. Overly wet foliage in KL's humid indoor environment can invite fungal issues.
+                </p>
+                
+                <div className="p-3 bg-green-50 rounded-lg mt-4 text-sm border-l-4 border-green-500">
+                  <p className="text-green-700">
+                    <strong>Pro tip:</strong> Use hydrogen peroxide (3%, food grade) at 2-3ml per liter of water to occasionally clean your system. 
+                    It adds oxygen and helps control pathogens.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-5 border-b border-gray-100 bg-green-50">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-bold">2</span>
+                  </div>
+                  <h5 className="text-lg font-medium text-green-700">Inspect and Act Early</h5>
+                </div>
+              </div>
+              <div className="p-5">
+                <h6 className="font-medium text-gray-700 mb-3">Check Weekly:</h6>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Look under leaves and around the root zone for signs of pests (e.g., aphids, whiteflies, fungus gnats). 
+                  Check for early warning signs like wilting, yellow specks, or fuzzy mold.
+                </p>
+                
+                <h6 className="font-medium text-gray-700 mb-3">Root Health Matters:</h6>
+                <p className="text-gray-600 text-sm">
+                  Healthy roots should be white or cream-colored—watch out for browning or unpleasant odors.
+                </p>
+                
+                <div className="p-3 bg-green-50 rounded-lg mt-4 text-sm border-l-4 border-green-500">
+                  <p className="text-green-700">
+                    <strong>Pro tip:</strong> Use yellow sticky traps near (but not touching) plants to monitor 
+                    flying pest populations and catch them before they become a problem.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-5 border-b border-gray-100 bg-green-50">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-bold">3</span>
+                  </div>
+                  <h5 className="text-lg font-medium text-green-700">Opt for Gentle, Natural Solutions</h5>
+                </div>
+              </div>
+              <div className="p-5">
+                <h6 className="font-medium text-gray-700 mb-3">Use Mild Controls:</h6>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Insecticidal soap, neem oil, or beneficial insects (like ladybugs) if pests become a problem.
+                </p>
+                
+                <h6 className="font-medium text-gray-700 mb-3">Maintain pH & EC:</h6>
+                <p className="text-gray-600 text-sm">
+                  Stable nutrient levels discourage disease. Sudden pH swings can weaken plants.
+                </p>
+                
+                <h6 className="font-medium text-gray-700 mb-3">Encourage Airflow:</h6>
+                <p className="text-gray-600 text-sm">
+                  A small fan helps reduce stagnant air, preventing mold or mildew in KL's humid climate.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Common pests in Malaysia section */}
+          <div className="mb-10">
+            <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+              <div className="p-2 bg-amber-100 rounded-full mr-2">
+                <Leaf className="h-5 w-5 text-amber-600" />
+              </div>
+              Common Hydroponic Pests in Malaysia
+            </h4>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Pest</th>
+                    <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Signs</th>
+                    <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Malaysian Prevalence</th>
+                    <th className="p-3 text-left text-gray-600 font-medium border-b border-gray-200">Natural Controls</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Aphids</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Small green/black insects on new growth; sticky residue</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3, 4].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                        <span className="text-gray-300">★</span>
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Neem oil spray, insecticidal soap, ladybugs</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Fungus Gnats</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Small black flies around growing media; larvae in roots</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Sticky traps, dry top layer of media, hydrogen peroxide flush</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Spider Mites</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Fine webbing on leaves; tiny specks moving; yellowing leaves</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                        {[1, 2].map(i => (
+                          <span key={i} className="text-gray-300">★</span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Neem oil, insecticidal soap, increasing humidity</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Whiteflies</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Small white insects fly up when plants are disturbed</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3, 4].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                        <span className="text-gray-300">★</span>
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Yellow sticky traps, neem oil spray, insecticidal soap</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Mealybugs</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Cotton-like clusters on stems and leaf joints</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                        {[1, 2].map(i => (
+                          <span key={i} className="text-gray-300">★</span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Alcohol-dipped cotton swab, neem oil, beneficial insects</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border-b border-gray-200 font-medium">Thrips</td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Silvery streaks on leaves; tiny slender insects</p>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <div className="flex">
+                        {[1, 2, 3, 4].map(i => (
+                          <span key={i} className="text-amber-500">★</span>
+                        ))}
+                        <span className="text-gray-300">★</span>
+                      </div>
+                    </td>
+                    <td className="p-3 border-b border-gray-200">
+                      <p className="text-sm">Blue sticky traps, neem oil, insecticidal soap</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          {/* Common diseases section */}
+          <div className="mb-10">
+            <h4 className="text-lg font-medium text-green-600 mb-5 flex items-center">
+              <div className="p-2 bg-blue-100 rounded-full mr-2">
+                <Droplet className="h-5 w-5 text-blue-600" />
+              </div>
+              Common Hydroponic Diseases in Tropical Climates
+            </h4>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-3 flex items-center">
+                  <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mr-2 text-red-600 text-xs font-bold">1</span>
+                  Root Rot (Pythium)
+                </h5>
+                <div className="space-y-3">
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Symptoms:</h6>
+                    <p className="text-sm text-gray-600">Brown, slimy roots; rotting smell; plant wilting despite wet media</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Causes in Malaysia:</h6>
+                    <p className="text-sm text-gray-600">High water temperatures (above 26°C); poor oxygenation; high humidity</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Prevention & Treatment:</h6>
+                    <ul className="ml-3 text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Add air stones for more oxygen</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Keep reservoir water cooler with insulation</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Use beneficial bacteria products</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">H₂O₂ treatment for infected systems</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-3 flex items-center">
+                  <span className="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center mr-2 text-amber-600 text-xs font-bold">2</span>
+                  Powdery Mildew
+                </h5>
+                <div className="space-y-3">
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Symptoms:</h6>
+                    <p className="text-sm text-gray-600">White powdery patches on leaves; spreads rapidly in humid conditions</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Causes in Malaysia:</h6>
+                    <p className="text-sm text-gray-600">High humidity with poor air circulation; fluctuating temperatures</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Prevention & Treatment:</h6>
+                    <ul className="ml-3 text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Maintain consistent airflow with fans</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Space plants properly for air movement</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Spray with diluted milk solution (40% milk, 60% water)</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Neem oil application (preventative)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-3 flex items-center">
+                  <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2 text-blue-600 text-xs font-bold">3</span>
+                  Leaf Spot Diseases
+                </h5>
+                <div className="space-y-3">
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Symptoms:</h6>
+                    <p className="text-sm text-gray-600">Yellow/brown spots on leaves with yellow halos; leaves eventually die</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Causes in Malaysia:</h6>
+                    <p className="text-sm text-gray-600">Water splashing on leaves; high humidity; poor air circulation</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Prevention & Treatment:</h6>
+                    <ul className="ml-3 text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Avoid wetting leaves when watering</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Remove affected leaves immediately</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Apply copper-based fungicide for severe cases</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Increase spacing between plants</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <h5 className="font-medium text-gray-800 mb-3 flex items-center">
+                  <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2 text-green-600 text-xs font-bold">4</span>
+                  Algae Growth
+                </h5>
+                <div className="space-y-3">
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Symptoms:</h6>
+                    <p className="text-sm text-gray-600">Green slime in reservoir or on growing media; roots may become entangled</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Causes in Malaysia:</h6>
+                    <p className="text-sm text-gray-600">Light exposure to nutrient solution; warm temperatures; stagnant water</p>
+                  </div>
+                  <div>
+                    <h6 className="text-sm font-medium text-gray-700">Prevention & Treatment:</h6>
+                    <ul className="ml-3 text-sm space-y-1">
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Cover reservoir and channels to block light</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Use opaque containers instead of clear ones</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Add food-grade hydrogen peroxide (3ml per liter)</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-green-500 mr-2">•</span>
+                        <span className="text-gray-600">Regular system cleaning and water changes</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Preventative measures section */}
+          <div className="bg-green-50 p-6 rounded-lg border border-green-100 mb-8">
+            <h4 className="text-lg font-medium text-green-700 mb-4">Natural Preventative Measures for Malaysian Growers</h4>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex items-center mb-3">
+                  <span className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-green-600 text-lg">🌿</span>
+                  <h5 className="font-medium text-gray-800">Companion Planting</h5>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Even in hydroponics, you can companion plant in separate containers to deter pests.
+                </p>
+                <ul className="text-sm space-y-1">
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Basil repels flies and mosquitoes</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Mint deters ants and aphids</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Lemongrass repels mosquitoes</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex items-center mb-3">
+                  <span className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 text-blue-600 text-lg">💧</span>
+                  <h5 className="font-medium text-gray-800">DIY Plant Spray</h5>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Make a natural preventative spray that's effective in Malaysian climate.
+                </p>
+                <div className="p-3 bg-gray-50 rounded-lg text-sm">
+                  <p className="font-medium text-gray-700 mb-1">Basic Recipe:</p>
+                  <ul className="space-y-1 text-gray-600">
+                    <li>1L water</li>
+                    <li>2 tbsp neem oil</li>
+                    <li>1 tsp liquid soap (emulsifier)</li>
+                    <li>Optional: 5 drops lemongrass essential oil</li>
+                  </ul>
+                  <p className="mt-2 text-gray-700">Spray weekly as preventative</p>
+                </div>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex items-center mb-3">
+                  <span className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center mr-3 text-amber-600 text-lg">🧪</span>
+                  <h5 className="font-medium text-gray-800">System Maintenance</h5>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Regular maintenance specifically adapted for tropical conditions.
+                </p>
+                <ul className="text-sm space-y-1">
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Change nutrient solution weekly (not bi-weekly)</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Clean system with vinegar solution monthly</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Monitor EC/pH twice weekly in KL's heat</span>
+                  </li>
+                  <li className="flex items-baseline">
+                    <span className="text-green-500 mr-2">•</span>
+                    <span className="text-gray-600">Trim dead/yellowing leaves immediately</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          {/* Final box - emergency measures */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+            <h4 className="text-lg font-medium text-red-600 mb-4 flex items-center">
+              <span className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3 text-red-600">
+                <span className="font-bold">!</span>
+              </span>
+              Emergency Measures for Severe Infestations
+            </h4>
+            
+            <p className="text-gray-700 mb-4">
+              If preventative methods fail and you're facing a severe pest or disease outbreak, here are some last-resort options:
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">Quarantine & Isolation</h5>
+                <p className="text-sm text-gray-600">
+                  Immediately move affected plants away from healthy ones. Set up a separate area at least 2 meters 
+                  away with its own tools and equipment to prevent cross-contamination.
+                </p>
+              </div>
+              
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">System Reset</h5>
+                <p className="text-sm text-gray-600">
+                  For severe root or water-borne issues, completely empty and sanitize your system with a 10% bleach solution 
+                  (rinse thoroughly afterward). Replace all growing media and start with new seedlings if possible.
+                </p>
+              </div>
+              
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">Commercial Products</h5>
+                <p className="text-sm text-gray-600">
+                  If organic methods fail, commercial products like potassium bicarbonate for fungal issues or pyrethrin-based 
+                  insecticides may be necessary. Always follow label instructions precisely.
+                </p>
+              </div>
+              
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h5 className="font-medium text-gray-800 mb-2">Plant Sacrifice</h5>
+                <p className="text-sm text-gray-600">
+                  Sometimes removing the most severely affected plants completely is the best strategy to save the rest of your garden. 
+                  Seal removed plants in plastic bags before disposal to prevent spreading pests.
+                </p>
+              </div>
+            </div>
+            
+            <div className="mt-5 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-300">
+              <p className="text-sm text-yellow-800">
+                <strong>Important:</strong> In Malaysia's high-density urban environments, be considerate of neighbors when using sprays 
+                or treatments. Many pest control products can trigger allergies or affect pets. Always notify nearby residents if 
+                using stronger treatments in shared spaces like apartment balconies.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      </div>
       
       {/* Switch to soil guide */}
       <div className="mt-10 text-center p-8 bg-green-50 rounded-lg shadow-sm border border-gray-200">
         <p className="mb-4 text-gray-700">Looking for information about traditional soil gardening?</p>
         <a 
-          href="/guides/potted-soil-plan" 
+          href="/guides/potted-soil" 
           className="inline-block px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium shadow-sm"
         >
           Switch to Potted Soil Guide
@@ -1601,6 +2945,9 @@ const HydroponicGuide = () => {
                       {step === 'step2' && 'System Type'}
                       {step === 'step3' && 'Growing Media'}
                       {step === 'step4' && 'Planting Schedule'}
+                      {step === 'step5' && 'Seeds & Seedlings'}
+                      {step === 'step6' && 'Nutrient Management'}
+                      {step === 'step7' && 'Pest & Disease'}
                     </button>
                   ))}
                 </div>
