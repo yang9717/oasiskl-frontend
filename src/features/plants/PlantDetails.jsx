@@ -284,7 +284,7 @@ const PlantDetails = () => {
             <p className="text-gray-700 mt-1">Learn how to properly care for this plant with our detailed guide!</p>
           </div>
           <Link 
-            to={`/plants/${id}/care`} 
+            to={`/care-guides/${plant.plant_id}`} 
             className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center"
           >
             <BookOpen className="w-4 h-4 mr-2" />
