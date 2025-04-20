@@ -188,7 +188,7 @@ const CareMain = () => {
               
               <div className="bg-green-600 p-6 text-center text-white">
                 <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">hydroponic garden</span></h4>
-                <a href="/guides/hydroponics-plan" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
+                <a href="/guides/hydroponics" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
                   Learn How
                 </a>
               </div>
@@ -253,7 +253,7 @@ const CareMain = () => {
               
               <div className="bg-green-600 p-6 text-center text-white">
                 <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">soil-based garden</span></h4>
-                <a href="/guides/potted-soil-plan" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
+                <a href="/guides/potted-soil" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
                   Learn How
                 </a>
               </div>

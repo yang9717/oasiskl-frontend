@@ -19,7 +19,8 @@ const GeneralCare = () => {
       <div className="bg-gradient-to-r from-green-700 to-green-500 text-white rounded-lg mb-10 overflow-hidden">
         <div className="md:flex">
           <div className="p-8 md:p-12 md:w-3/5">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Planning Guides for Indoor Seed Starting</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Start to Sprout: 
+              <br />A Complete Guide for Indoor Seed Success</h1>
             <p className="text-green-100 text-lg mb-6">
               Everything you need to know about starting seeds and growing plants successfully in your home,
               whether you're using traditional soil methods or hydroponics.
@@ -40,7 +41,7 @@ const GeneralCare = () => {
       <div className="mb-8">
         <div className="flex justify-center space-x-6">
           <NavLink 
-            to="/guides/potted-soil-plan" 
+            to="/guides/potted-soil" 
             className={({ isActive }) => 
               `flex flex-col items-center px-8 py-5 rounded-xl transition-all duration-200 ease-in-out transform shadow-lg
               ${isActive 
@@ -56,7 +57,7 @@ const GeneralCare = () => {
           </NavLink>
           
           <NavLink 
-            to="/guides/hydroponics-plan" 
+            to="/guides/hydroponics" 
             className={({ isActive }) => 
               `flex flex-col items-center px-8 py-5 rounded-xl transition-all duration-200 ease-in-out transform shadow-lg
               ${isActive 
