@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Accessibility, Dog, CircleArrowLeft} from 'lucide-react';
+import { MapPin, Clock, Ticket, ArrowRight, Filter, Users, Accessibility, Dog, CircleArrowLeft, ChevronLeft, ChevronRight} from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
 
 const GreenMap = () => {
@@ -42,7 +42,8 @@ const GreenMap = () => {
   const spacesPerPage = 5;
 
   // API base URL
-  const API_BASE_URL = '/api';
+  // const API_BASE_URL = '/api'; // Deployed URL
+  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {
     const fetchSpaces = async () => {
@@ -500,45 +501,49 @@ const GreenMap = () => {
                   {/* Pagination */}
                   {totalPages > 1 && (
                     <div className="flex justify-center mt-8">
-                      <div className="flex items-center rounded-lg overflow-hidden shadow-sm">
+                      <div className="flex items-center space-x-2">
                         <button 
                           onClick={() => currentPage > 1 && paginate(currentPage - 1)}
                           disabled={currentPage === 1}
-                          className={`px-4 py-2 border-r border-gray-200 ${
-                            currentPage === 1 
-                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                              : 'bg-white text-green-600 hover:bg-gray-50'
-                          }`}
+                          className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:bg-green-50'}`}
                         >
-                          Previous
+                          <ChevronLeft size={20} />
                         </button>
-                        
-                        <div className="flex">
-                          {Array.from({ length: totalPages }, (_, i) => (
-                            <button
-                              key={i + 1}
-                              onClick={() => paginate(i + 1)}
-                              className={`w-10 h-10 flex items-center justify-center border-r border-gray-200 ${
-                                currentPage === i + 1
-                                  ? 'bg-green-600 text-white'
-                                  : 'bg-white text-gray-700 hover:bg-gray-50'
-                              }`}
-                            >
-                              {i + 1}
-                            </button>
-                          ))}
-                        </div>
-                        
+
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                          .filter(num => {
+                            return num === 1 ||
+                                  num === totalPages ||
+                                  (num >= currentPage - 1 && num <= currentPage + 1);
+                          })
+                          .map((number, index, array) => {
+                            const showEllipsisBefore = index > 0 && array[index - 1] !== number - 1;
+                            const showEllipsisAfter = index < array.length - 1 && array[index + 1] !== number + 1;
+
+                            return (
+                              <React.Fragment key={number}>
+                                {showEllipsisBefore && <span className="px-3 py-1 text-gray-500">...</span>}
+                                <button
+                                  onClick={() => paginate(number)}
+                                  className={`px-3 py-1 rounded-md ${
+                                    currentPage === number
+                                      ? 'bg-green-600 text-white'
+                                      : 'text-gray-700 hover:bg-green-50'
+                                  }`}
+                                >
+                                  {number}
+                                </button>
+                                {showEllipsisAfter && <span className="px-3 py-1 text-gray-500">...</span>}
+                              </React.Fragment>
+                            );
+                          })}
+
                         <button
                           onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
                           disabled={currentPage === totalPages}
-                          className={`px-4 py-2 ${
-                            currentPage === totalPages
-                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                              : 'bg-white text-green-600 hover:bg-gray-50'
-                          }`}
+                          className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:bg-green-50'}`}
                         >
-                          Next
+                          <ChevronRight size={20} />
                         </button>
                       </div>
                     </div>
