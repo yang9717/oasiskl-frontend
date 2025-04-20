@@ -129,71 +129,6 @@ const CareMain = () => {
         </h2>
           
           <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            {/* Hydroponics Card */}
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border border-green-600 border-2 flex flex-col">
-              <div className="p-8 flex-grow">
-                <h3 className="text-3xl font-bold mb-3 text-center">
-                  Grow with <span className="text-orange-500">Hydroponics</span>
-                </h3>
-                <p className="text-gray-600 mb-6 text-lg">
-                  Perfect for modern apartments in KL — hydroponics offers a clean, space-saving way to grow plants indoors.
-                </p>
-                
-                <div className="flex items-center mb-8">
-                  <div className="w-1/2">
-                    <img 
-                      src="/assets/careguides/hydroponic.jpg" 
-                      alt="Hydroponic plant" 
-                      className="w-full h-40 object-cover rounded-lg"
-                    />
-                  </div>
-                  <div className="w-1/2 pl-8">
-                    <ul className="space-y-3">
-                      <li className="flex items-center">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                        </span>
-                        <span className="text-gray-700">Space-efficient</span>
-                      </li>
-                      <li className="flex items-center">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                        </span>
-                        <span className="text-gray-700">Water-saving</span>
-                      </li>
-                      <li className="flex items-center">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                        </span>
-                        <span className="text-gray-700">Year-round growing</span>
-                      </li>
-                      <li className="flex items-center">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                        </span>
-                        <span className="text-gray-700">Precise nutrient control</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-green-600 p-6 text-center text-white">
-                <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">hydroponic garden</span></h4>
-                <a href="/guides/hydroponics" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
-                  Learn How
-                </a>
-              </div>
-            </div>
-            
             {/* Soil-Based Card */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-green-600 border-2 flex flex-col">
               <div className="p-8 flex-grow">
@@ -254,6 +189,70 @@ const CareMain = () => {
               <div className="bg-green-600 p-6 text-center text-white">
                 <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">soil-based garden</span></h4>
                 <a href="/guides/potted-soil" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
+                  Learn How
+                </a>
+              </div>
+            </div>
+            {/* Hydroponics Card */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border border-green-600 border-2 flex flex-col">
+              <div className="p-8 flex-grow">
+                <h3 className="text-3xl font-bold mb-3 text-center">
+                  Grow with <span className="text-orange-500">Hydroponics</span>
+                </h3>
+                <p className="text-gray-600 mb-6 text-lg">
+                  Perfect for modern apartments in KL — hydroponics offers a clean, space-saving way to grow plants indoors.
+                </p>
+                
+                <div className="flex items-center mb-8">
+                  <div className="w-1/2">
+                    <img 
+                      src="/assets/careguides/hydroponic.jpg" 
+                      alt="Hydroponic plant" 
+                      className="w-full h-40 object-cover rounded-lg"
+                    />
+                  </div>
+                  <div className="w-1/2 pl-8">
+                    <ul className="space-y-3">
+                      <li className="flex items-center">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Space-efficient</span>
+                      </li>
+                      <li className="flex items-center">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Water-saving</span>
+                      </li>
+                      <li className="flex items-center">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Year-round growing</span>
+                      </li>
+                      <li className="flex items-center">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </span>
+                        <span className="text-gray-700">Precise nutrient control</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-green-600 p-6 text-center text-white">
+                <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">hydroponic garden</span></h4>
+                <a href="/guides/hydroponics" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
                   Learn How
                 </a>
               </div>
