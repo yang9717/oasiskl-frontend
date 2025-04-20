@@ -26,8 +26,8 @@ const App = () => {
         <Route path="/care-guides" element={<CareMain />} />
         <Route path="/care-guides/:id" element={<PlantCareDetails />} />
         <Route path="/guides" element={<GeneralCare />} >
-          <Route path="potted-soil-plan" element={<SoilGuide />} />
-          <Route path="hydroponics-plan" element={<HydroponicGuide />} />
+          <Route path="potted-soil" element={<SoilGuide />} />
+          <Route path="hydroponics" element={<HydroponicGuide />} />
         </Route>
         <Route path="/plant-recognition" element={<PlantRecognition />} />
         <Route path="*" element={<NotFound />} />
