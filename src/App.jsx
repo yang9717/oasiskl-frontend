@@ -11,7 +11,7 @@ import PlantCareDetails from './features/plants/PlantCareDetails';
 import SoilGuide from './features/careGuides/SoilGuide';
 import HydroponicGuide from './features/careGuides/HydroponicGuide';
 import CareMain from './features/careGuides/CareMain';
-import PlantRecognition from './features/plantAI/PlantRecognition';
+import PlantIdentifier from './features/plantAI/PlantIdentifier';
 import GeneralCare from './features/careGuides/GeneralCare';
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="potted-soil" element={<SoilGuide />} />
           <Route path="hydroponics" element={<HydroponicGuide />} />
         </Route>
-        <Route path="/plant-recognition" element={<PlantRecognition />} />
+        <Route path="/plant-identifier" element={<PlantIdentifier />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
