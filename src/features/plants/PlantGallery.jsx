@@ -452,7 +452,7 @@ const PlantGallery = () => {
   return (
     <>
     {/* Hero Section */}
-    <section className="relative bg-gray-700 bg-opacity-80 bg-blend-overlay bg-cover bg-center" style={{ 
+    <section className="relative bg-gray-800 bg-opacity-80 bg-blend-overlay bg-cover bg-center" style={{ 
       backgroundImage: "url('/assets/careguides/herosection2.jpg')" 
     }}>
       <div className="container mx-auto py-20 px-4">

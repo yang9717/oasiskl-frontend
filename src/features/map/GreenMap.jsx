@@ -222,7 +222,7 @@ const GreenMap = () => {
     <>
       {/* Hero Section */}
       <div className="w-full">
-      <section className="relative bg-gray-700 bg-opacity-80 bg-blend-overlay bg-cover bg-center" style={{ 
+      <section className="relative bg-gray-800 bg-opacity-80 bg-blend-overlay bg-cover bg-center" style={{ 
         backgroundImage: "url('/assets/careguides/herosection3.jpg')" 
       }}>
           <div ref={mapRef} className="w-full h-full"></div>
