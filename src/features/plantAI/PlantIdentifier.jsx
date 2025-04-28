@@ -4,15 +4,49 @@ import { CircleArrowLeft, Camera, X, Upload, MessageCircleWarning, Zap, Leaf, Dr
 
 const PlantIdentifier = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null); // <-- Add this
+  const [prediction, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = '/api'
+
+  const identifyPlant = async () => {
+    if (!selectedFile) {
+      console.error('No file selected.');
+      return;
+    }
+    
+    setLoading(true);
+  
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+  
+    try {
+      const response = await fetch(`${API_BASE_URL}/predict`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+      setPrediction(data.prediction);
+    } catch (error) {
+      console.error('Error identifying plant:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      const file = e.target.files[0];
+      setSelectedImage(URL.createObjectURL(file));
+      setSelectedFile(file);
     }
   };
 
   const resetImage = () => {
     setSelectedImage(null);
+    setSelectedFile(null); // Reset the file too
+    setPrediction(null);   // Reset prediction
   };
 
   return (
@@ -128,11 +162,18 @@ const PlantIdentifier = () => {
 
             {/* Start Identify Button */}
             <button 
+              onClick={identifyPlant}
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-5 px-12 rounded-full text-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:pointer-events-none"
-              disabled={!selectedImage}
+              disabled={!selectedImage || loading}
             >
-              Identify Now! 🔍
+              {loading ? "Identifying...." : "Identify Now! 🔍"}
             </button>
+
+            {prediction && (
+              <div className="mt-8 text-2xl text-green-700 font-semibold">
+                🌿 Identified Plant: {prediction}
+              </div>
+            )}
           </div>
         </div>
       </section>
