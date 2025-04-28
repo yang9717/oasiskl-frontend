@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { X, ChevronLeft, ChevronRight, CircleArrowLeft, Search, Filter, Leaf, AlertCircle } from 'lucide-react';
 
-// const API_BASE_URL = '/api'; // Deploy URL
-const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+const API_BASE_URL = '/api'; // Deploy URL
+// const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
 const PlantGallery = () => {
   // State for search and filters
@@ -20,6 +20,9 @@ const PlantGallery = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    // Scroll to top when the component mounts
+    window.scrollTo(0, 0);
+
     const newFilters = { ...filters };
     
     // Check for suitability filter in URL
