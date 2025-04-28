@@ -277,7 +277,6 @@ const HydroponicGuide = () => {
                   </div>
                 </div>
                 
-                {/* Placeholder for image */}
                 <div className="md:w-1/2 h-64 bg-gray-100 rounded-lg overflow-hidden shadow-sm mt-4 md:mt-0 flex items-center justify-center">
                   <img
                     src="/assets/careguides/hy-step1.jpg"
@@ -387,7 +386,10 @@ const HydroponicGuide = () => {
                       BEGINNER-FRIENDLY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: DWC System</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/dwc.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -450,7 +452,10 @@ const HydroponicGuide = () => {
                       SPACE-SAVING
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: NFT System</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/nft.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -513,7 +518,10 @@ const HydroponicGuide = () => {
                       NO ELECTRICITY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Wick System</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/wick.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -718,7 +726,10 @@ const HydroponicGuide = () => {
                       ECO-FRIENDLY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Coco Coir</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/coco_coir.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -808,7 +819,10 @@ const HydroponicGuide = () => {
                       MOISTURE CONTROL
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Rockwool</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/rockwool.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -895,7 +909,10 @@ const HydroponicGuide = () => {
                       REUSABLE
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Clay Pellets</span>
+                      <img 
+                        src="/assets/careguides/hydroponics/clay_pellets.png" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -994,8 +1011,11 @@ const HydroponicGuide = () => {
                 {/* Perlite */}
                 <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
-                      <span className="text-gray-400">📷</span>
+                    <div className="w-24 h-20 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+                      <img 
+                        src="/assets/careguides/hydroponics/perlite.png"
+                        className="w-22 h-22 object-contain"
+                      />
                     </div>
                     <div>
                       <div className="flex items-center mb-1">
@@ -1059,8 +1079,11 @@ const HydroponicGuide = () => {
                 {/* Grow Sponges / Seedling Plugs */}
                 <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
-                      <span className="text-gray-400">📷</span>
+                    <div className="w-24 h-20 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+                      <img 
+                        src="/assets/careguides/hydroponics/sponges.jpg"
+                        className="w-22 h-22 object-contain"
+                      />
                     </div>
                     <div>
                       <div className="flex items-center mb-1">
@@ -1124,8 +1147,11 @@ const HydroponicGuide = () => {
                 {/* Vermiculite */}
                 <div className="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
-                      <span className="text-gray-400">📷</span>
+                    <div className="w-24 h-20 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+                      <img 
+                        src="/assets/careguides/hydroponics/vermiculite.png"
+                        className="w-22 h-22 object-contain"
+                      />
                     </div>
                     <div>
                       <div className="flex items-center mb-1">
