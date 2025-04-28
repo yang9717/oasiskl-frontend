@@ -398,6 +398,7 @@ const CareMain = () => {
                 <h3 className="text-xl font-bold mb-3 text-gray-800">
                   Indoor Gardening Malaysia – Learning from Mistakes
                 </h3>
+                <br />
                 <div className="flex items-center text-gray-500 mb-3 text-sm">
                   <span className="flex items-center mr-4">
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -435,6 +436,7 @@ const CareMain = () => {
                 <h3 className="text-xl font-bold mb-3 text-gray-800">
                   How to take care of garden during monsoon season
                 </h3>
+                <br />
                 <div className="flex items-center text-gray-500 mb-3 text-sm">
                   <span className="flex items-center mr-4">
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
