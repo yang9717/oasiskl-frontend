@@ -122,7 +122,7 @@ const HomePage = () => {
             </div>
 
             {/* Grow Your Own Space */}
-            <div className="bg-gray-500 text-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:-translate-y-2">
+            <div className="bg-gray-600 text-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:-translate-y-2">
               <div className="p-8 flex flex-col items-center text-center">
                 <div className="w-16 h-16 mb-4 flex items-center justify-center">
                   <Leaf className="w-12 h-12 text-green-400" />
@@ -131,31 +131,31 @@ const HomePage = () => {
                 <p className="mb-6 text-gray-200">
                   Get KL-tailored recommendations, care guides, and DIY tips to create your personal green oasis.
                 </p>
-                {/* <Link to="/grow" className="mt-auto inline-flex items-center text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-gray-700 transition-colors duration-300">
+                <Link to="/care-guides" className="mt-auto inline-flex items-center text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-gray-700 transition-colors duration-300">
                   VIEW DETAILS
                   <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </Link> */}
+                </Link>
               </div>
             </div>
 
             {/* Plant Gallery */}
-            <div className="bg-gray-500 text-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:-translate-y-2">
+            <div className="bg-gray-600 text-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:-translate-y-2">
               <div className="p-8 flex flex-col items-center text-center">
                 <div className="w-16 h-16 mb-4 flex items-center justify-center">
                   <BookOpen className="w-12 h-12 text-green-400" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Plant Gallery</h3>
                 <p className="mb-6 text-gray-200">
-                  Browse articles, videos, and guides on urban sustainability and green living.
+                  Explore our curated plant library and discover what thrives best in KL's climate.
                 </p>
-                {/* <Link to="/knowledge" className="mt-auto inline-flex items-center text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-gray-700 transition-colors duration-300">
+                <Link to="/gallery" className="mt-auto inline-flex items-center text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-gray-700 transition-colors duration-300">
                   VIEW DETAILS
                   <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </Link> */}
+                </Link>
               </div>
             </div>
 
