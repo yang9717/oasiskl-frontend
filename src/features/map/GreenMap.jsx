@@ -42,8 +42,8 @@ const GreenMap = () => {
   const spacesPerPage = 5;
 
   // API base URL
-  // const API_BASE_URL = '/api'; // Deployed URL
-  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  const API_BASE_URL = '/api'; // Deployed URL
+  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {
     const fetchSpaces = async () => {
