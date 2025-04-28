@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Flower2, Droplets, Leaf, Sun, CloudRain } from 'lucide-react';
 
@@ -7,7 +7,10 @@ const GeneralCare = () => {
   const navigate = useNavigate();
   
   // Redirect to potted-soil by default if we're just at /guides
-  React.useEffect(() => {
+  useEffect(() => {
+    // Scroll to top when the components mount
+    window.scrollTo(0, 0);
+
     if (location.pathname === '/guides') {
       navigate('/guides/potted-soil', { replace: true });
     }
