@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { CircleArrowLeft, Droplet, Sun, Scissors, Home, Calendar, ThermometerSun, Leaf, SearchCheck, BadgeInfo, NotebookPen } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
+
 
 const PlantCareGuide = () => {
   useTitle('OasisKL - Plant Care Guide');
@@ -10,13 +11,10 @@ const PlantCareGuide = () => {
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [searchParams] = useSearchParams();
-  const fromSpace = searchParams.get('fromSpace');
   
   // API URL
-  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
-  // const API_BASE_URL = '/api'; // Deploy URL
+  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  const API_BASE_URL = '/api'; // Deploy URL
   
   // Fetch plant data
   useEffect(() => {
@@ -108,7 +106,7 @@ const PlantCareGuide = () => {
       {/* Navigation back link */}
       <div className="mb-6">
         <Link 
-          to={`/plants/${id}?fromSpace=${fromSpace || ''}`}
+          to={`/plants/${id}`}
           className="flex items-center text-green-600 hover:text-green-700 transition-colors"
         >
           <CircleArrowLeft className="w-4 h-4 mr-2" />

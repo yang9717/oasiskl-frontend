@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { MapPin, Clock, Ticket, ListChecks, Users, Accessibility, Dog, Sprout, CircleArrowLeft, Info, Leaf } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
+import { saveNavigationContext } from '../../hooks/navigationContext';
 
 const GreenSpaceDetail = () => {
   useTitle('OasisKL - Green Space Details');
@@ -24,9 +25,13 @@ const GreenSpaceDetail = () => {
       window.scrollTo(0, 0);
     }, 50);
   };
+
+  const handlePlantClick = () => {
+    saveNavigationContext('space', id);
+  };
   
-  // const API_BASE_URL = '/api'; // Deploy URL
-  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  const API_BASE_URL = '/api'; // Deploy URL
+  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -488,7 +493,8 @@ const GreenSpaceDetail = () => {
                     </div>
                     
                     <Link
-                      to={`/plants/${plant.plant_id}?fromSpace=${id}`}
+                      to={`/plants/${plant.plant_id}`}
+                      onClick={handlePlantClick}
                       className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
                       Learn more
                     </Link>
@@ -524,7 +530,8 @@ const GreenSpaceDetail = () => {
                     </div>
                     
                     <Link
-                      to={`/plants/${plant.plant_id}?fromSpace=${id}`}
+                      to={`/plants/${plant.plant_id}`}
+                      onClick={handlePlantClick}
                       className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
                       Learn more
                     </Link>

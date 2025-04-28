@@ -1,10 +1,10 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { Link } from "react-router-dom";
 import { CircleArrowLeft, Leaf, ThermometerSun, Heart, Sun, Sprout, ShoppingBag, ChevronsDown } from "lucide-react";
 
 const CareMain = () => {
 
-  const [videoPlaying, setVideoPlaying] = React.useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const videoId = "l2itHbx8lkY";
 
   return (

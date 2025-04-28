@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CircleArrowLeft, Leaf, MapPin, SearchCheck, Info, BookOpen, Droplet, Sun, Scissors } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
+import { getNavigationContext } from '../../hooks/navigationContext';
 
 const PlantDetails = () => {
   useTitle('OasisKL - Plant Details');
-  const [searchParams] = useSearchParams();
-  const fromSpace = searchParams.get('fromSpace');
 
   const { id } = useParams();
   const [plant, setPlant] = useState(null);
@@ -14,8 +13,11 @@ const PlantDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const API_BASE_URL = '/api'; // Deploy URL
-  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  const navigate = useNavigate();
+  const context = getNavigationContext();
+
+  const API_BASE_URL = '/api'; // Deploy URL
+  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   // Fetch plant data from backend
   useEffect(() => {
@@ -163,23 +165,70 @@ const PlantDetails = () => {
         <p className="text-xl">Plant not found</p>
       </div>
     );
-  }
+  };
+
+  // When going to care page, preserve the original navigation context
+  const handleCareClick = () => {
+    // We don't need to change the context, it persists in localStorage
+  };
+  
+  // Function to handle back navigation based on context
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    
+    if (!context) {
+      // Fallback if no context exists
+      navigate('/spaces');
+      return;
+    }
+    
+    switch (context.sourceType) {
+      case 'space':
+        navigate(`/spaces/${context.sourceId}`);
+        break;
+      case 'gallery':
+        navigate('/gallery');
+        break;
+      case 'care':
+        // If we came from care, we should go back to the original source
+        // The context would still have the original 'space' or 'gallery' value
+        if (context.sourceType === 'space') {
+          navigate(`/spaces/${context.sourceId}`);
+        } else {
+          navigate('/gallery');
+        }
+        break;
+      default:
+        navigate('/');
+    }
+  };
+  
+  // Determine back button text based on navigation context
+  const getBackButtonText = () => {
+    if (!context) return 'Back to Green Spaces';
+    
+    switch (context.sourceType) {
+      case 'space':
+        return 'Back to Green Space';
+      case 'gallery':
+        return 'Back to Gallery';
+      default:
+        return 'Back';
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Navigation */}
       <div className="mb-6">
-        {fromSpace ? (
-          <Link to={`/spaces/${fromSpace}`} className="flex items-center text-green-600 hover:text-green-700 transition-colors">
-            <CircleArrowLeft className="w-4 h-4 mr-2" />
-            Back to Green Space
-          </Link>
-        ) : (
-          <Link to="/spaces" className="flex items-center text-green-600 hover:text-green-700 transition-colors">
-            <CircleArrowLeft className="w-4 h-4 mr-2" />
-            Back to Green Spaces
-          </Link>
-        )}
+        <a 
+          href="#" 
+          onClick={handleBackClick}
+          className="flex items-center text-green-600 hover:text-green-700 transition-colors"
+        >
+          <CircleArrowLeft className="w-4 h-4 mr-2" />
+          {getBackButtonText()}
+        </a>
       </div>
       
       {/* Hero Banner */}
@@ -293,7 +342,8 @@ const PlantDetails = () => {
             <p className="text-gray-700 mt-1">Learn how to properly care for this plant with our detailed guide!</p>
           </div>
           <Link 
-            to={`/care-guides/${plant.plant_id}`} 
+            to={`/care-guides/${plant.plant_id}`}
+            onClick={handleCareClick}
             className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center"
           >
             <BookOpen className="w-4 h-4 mr-2" />

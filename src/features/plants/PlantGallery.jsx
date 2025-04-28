@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { X, ChevronLeft, ChevronRight, CircleArrowLeft, Search, Filter, Leaf, AlertCircle } from 'lucide-react';
+import { saveNavigationContext } from '../../hooks/navigationContext';
+import { useTitle } from '../../hooks/useTitle';
 
 const API_BASE_URL = '/api'; // Deploy URL
 // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
 const PlantGallery = () => {
+
+  useTitle('OasisKL - Plant Gallery');
   // State for search and filters
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -36,6 +40,10 @@ const PlantGallery = () => {
       setFilters(newFilters);
     }
   }, [searchParams]);
+
+  const handlePlantClick = () => {
+    saveNavigationContext('gallery');
+  };
 
   useEffect(() => {
     // Don't update URL on initial render
@@ -386,6 +394,7 @@ const PlantGallery = () => {
           </p>
           <Link 
             to={`/plants/${plant.plant_id}`}
+            onClick={handlePlantClick}
             className="block text-center py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
           >
             View Details
