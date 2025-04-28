@@ -366,7 +366,11 @@ const SoilGuide = () => {
                       BEGINNER-FRIENDLY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Plastic Seedling Cells</span>
+                      <img 
+                        src="/assets/careguides/potted/plastic_seedling.jpg" 
+                        alt="Plastic Seedling Cells" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -415,7 +419,11 @@ const SoilGuide = () => {
                       VERSATILE
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Small Plastic Pots</span>
+                      <img 
+                        src="/assets/careguides/potted/small_plastic.jpg" 
+                        alt="Plastic Seedling Cells" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -464,7 +472,10 @@ const SoilGuide = () => {
                       ECO-FRIENDLY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Biodegradable Fiber Pots</span>
+                      <img 
+                        src="/assets/careguides/potted/biodegradable_fiber.jpg" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -588,7 +599,11 @@ const SoilGuide = () => {
               {/* Coco Peat */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: Coco Peat</span>
+                  <img 
+                    src="/assets/careguides/potted/coco_peat.jpg" 
+                    alt="Coco Peat" 
+                    className="max-h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                 <div className="mb-2">
@@ -613,7 +628,11 @@ const SoilGuide = () => {
               {/* Perlite */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: Perlite</span>
+                  <img 
+                    src="/assets/careguides/potted/perlite.jpg" 
+                    alt="Coco Peat" 
+                    className="max-h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                 <div className="mb-2">
@@ -638,7 +657,11 @@ const SoilGuide = () => {
               {/* Vermiculite */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: Vermiculite</span>
+                  <img 
+                    src="/assets/careguides/potted/vermiculite.jpg" 
+                    alt="Coco Peat" 
+                    className="max-h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <div className="flex items-center mb-2">
@@ -660,8 +683,12 @@ const SoilGuide = () => {
               {/* Compost */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: Compost</span>
-                </div>
+                    <img 
+                      src="/assets/careguides/potted/compost.jpg" 
+                      alt="Coco Peat" 
+                      className="max-h-full object-contain"
+                    />
+                  </div>
                 <div className="p-4">
                   <div className="flex items-center mb-2">
                     <h5 className="font-medium mr-2">Compost</h5>
@@ -682,7 +709,11 @@ const SoilGuide = () => {
               {/* Peat Moss */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: Peat Moss</span>
+                  <img 
+                    src="/assets/careguides/potted/peat_moss.jpg" 
+                    alt="Coco Peat" 
+                    className="max-h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <div className="flex items-center mb-2">
@@ -704,7 +735,11 @@ const SoilGuide = () => {
               {/* River Sand */}
               <div className="bg-green-50 rounded-lg overflow-hidden shadow-sm">
                 <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-400">Image: River Sand</span>
+                  <img 
+                    src="/assets/careguides/potted/river_sand.jpg" 
+                    alt="Coco Peat" 
+                    className="max-h-full object-contain"
+                  />
                 </div>
                 <div className="p-4">
                   <div className="flex items-center mb-2">
@@ -1167,7 +1202,11 @@ const SoilGuide = () => {
                       ECO-FRIENDLY
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Organic Nutrients</span>
+                      <img 
+                        src="/assets/careguides/potted/organic_nutrients.jpg" 
+                        alt="Organic Nutrients" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -1211,7 +1250,11 @@ const SoilGuide = () => {
                       PRECISE CONTROL
                     </div>
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">Image: Chemical Nutrients</span>
+                      <img 
+                        src="/assets/careguides/potted/chemical_nutrients.jpg" 
+                        alt="Organic Nutrients" 
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
