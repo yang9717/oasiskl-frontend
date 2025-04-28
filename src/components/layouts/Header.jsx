@@ -20,6 +20,31 @@ const Header = () => {
     };
   }, []);
 
+  // Toggle dropdown
+  const toggleDropdown = () => {
+    setGalleryDropdownOpen(prevState => !prevState);
+  };
+
+  // Handle click on Indoor Plants
+  const handleIndoorClick = (e) => {
+    // Don't prevent default here - let the Link navigate normally
+    setGalleryDropdownOpen(false);
+  };
+
+  // Handle click on Outdoor Plants
+  const handleOutdoorClick = (e) => {
+    // Don't prevent default here - let the Link navigate normally
+    setGalleryDropdownOpen(false);
+  };
+
+  // Handle "View All Plants" click
+  const handleViewAllClick = (e) => {
+    e.preventDefault();
+    setGalleryDropdownOpen(false);
+    // Use window.location for a full page reload
+    window.location.href = '/gallery';
+  };
+
   return (
     <header className="bg-gray-800 text-white px-10 py-4 flex justify-between items-center shadow-md">
       {/* Logo */}
@@ -53,10 +78,11 @@ const Header = () => {
           </li>
           <li ref={dropdownRef} className="relative">
             <button 
-              onClick={() => setGalleryDropdownOpen(!galleryDropdownOpen)}
+              onClick={toggleDropdown}
               className="flex items-center text-white hover:text-green-300 focus:outline-none transition duration-200"
               aria-expanded={galleryDropdownOpen}
               aria-haspopup="true"
+              type="button"
             >
               <span>Plant Gallery</span>
               <svg 
@@ -71,27 +97,30 @@ const Header = () => {
             
             {galleryDropdownOpen && (
               <div 
-                className="absolute top-full left-0 mt-2 py-2 w-33 bg-gray-700 rounded-md shadow-lg z-10 transform origin-top-left transition-transform duration-200"
+                className="absolute top-full left-0 mt-2 py-2 w-33 bg-gray-700 rounded-md shadow-lg z-50 transform origin-top-left transition-transform duration-200"
               >
                 <Link 
                   to="/gallery?suitability=Indoor%20friendly" 
                   className="block px-4 py-2 text-sm text-white hover:bg-gray-600 hover:text-green-300 transition duration-150"
+                  onClick={handleIndoorClick}
                 >
                   Indoor Plants
                 </Link>
                 <Link 
                   to="/gallery?suitability=Outdoor%20only" 
                   className="block px-4 py-2 text-sm text-white hover:bg-gray-600 hover:text-green-300 transition duration-150"
+                  onClick={handleOutdoorClick}
                 >
                   Outdoor Plants
                 </Link>
                 <div className="border-t border-gray-600 my-1"></div>
-                <Link 
-                  to="/gallery" 
+                <a 
+                  href="/gallery"
+                  onClick={handleViewAllClick}
                   className="block px-4 py-2 text-sm text-white hover:bg-gray-600 hover:text-green-300 transition duration-150"
                 >
                   View All Plants
-                </Link>
+                </a>
               </div>
             )}
           </li>
