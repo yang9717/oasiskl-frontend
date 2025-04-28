@@ -488,7 +488,7 @@ const GreenSpaceDetail = () => {
                     </div>
                     
                     <Link
-                      to={`/plants/${plant.plant_id}`}
+                      to={`/plants/${plant.plant_id}?fromSpace=${id}`}
                       className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
                       Learn more
                     </Link>
@@ -524,7 +524,7 @@ const GreenSpaceDetail = () => {
                     </div>
                     
                     <Link
-                      to={`/plants/${plant.plant_id}`}
+                      to={`/plants/${plant.plant_id}?fromSpace=${id}`}
                       className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
                       Learn more
                     </Link>
