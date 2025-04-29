@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { X, ChevronLeft, ChevronRight, CircleArrowLeft, Search, Filter, Leaf, AlertCircle } from 'lucide-react';
 import { saveNavigationContext } from '../../hooks/navigationContext';
-import { useTitle } from '../../hooks/useTitle';
+import useTitle from '../../hooks/useTitle';
 
 const API_BASE_URL = '/api'; // Deploy URL
 // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
