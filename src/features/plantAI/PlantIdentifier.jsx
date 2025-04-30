@@ -16,8 +16,12 @@ const PlantIdentifier = () => {
   const API_BASE_URL = '/api'; // Deploy URL
   // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
+  // Scroll to top on component mount
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
     // Only fetch plant details if we have a prediction ID
     if (predictionId) {
       const fetchPlantDetails = async () => {
