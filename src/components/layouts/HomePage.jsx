@@ -50,8 +50,13 @@ const HomePage = () => {
       <section className="relative h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('/assets/homepage/homepagehero55.jpg')" }}>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-100"></div>
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-          <h1 className="text-white text-6xl md:text-7xl font-bold mb-8">
-            <span className="whitespace-nowrap">Reconnect With Green Spaces</span>
+          <h1 className="text-white text-4xl text-[4.125rem] font-bold mb-8">
+            <span className="block">Embrace</span>
+            <span className="block mt-2 relative">
+              <span className="bg-gradient-to-r from-green-500 to-green-300 bg-clip-text text-transparent">Urban Oasis</span>
+              <span className="mx-2">&</span>
+              <span className="bg-gradient-to-r from-green-300 to-teal-400 bg-clip-text text-transparent">Vibrant Biodiversity</span>
+            </span>
             <span className="block text-orange-500 mt-3">in Kuala Lumpur</span>
           </h1>
           <div className="mt-8">
@@ -95,7 +100,7 @@ const HomePage = () => {
             <h2 className="text-5xl font-bold text-gray-800 mb-4">What We Offer</h2>
             <div className="w-24 h-1 bg-green-500 mx-auto mb-6"></div>
             <p className="max-w-2xl mx-auto text-gray-600">
-              Discover tools and resources to connect with nature in Kuala Lumpur's urban landscape
+              Discover tools and resources to embrace urban oases and explore biodiversity in KL
             </p>
           </div>
           
@@ -111,7 +116,7 @@ const HomePage = () => {
                   <h3 className="text-3xl font-bold text-gray-800 mb-1">Green Spaces</h3>
                   <div className="w-16 h-1 bg-green-500 mb-4"></div>
                   <p className="text-gray-600">
-                    Discover and create nature connections in KL's urban environment
+                    Find and nurture green environments within the concrete jungle
                   </p>
                 </div>
               </div>
@@ -305,43 +310,90 @@ const HomePage = () => {
       </section>
 
       {/* Featured Plants Section with API data */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gradient-to-b from-white to-green-50 -mt-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-gray-800 mb-3 text-center">Featured Plants for KL</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-            Discover these beautiful plants that are perfectly suited for KL's tropical climate and urban spaces
-          </p>
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-4">Our Selection</span>
+            <h2 className="text-5xl font-bold text-gray-800 mb-4">Featured Plants for KL</h2>
+            <div className="w-24 h-1 bg-green-500 mx-auto mb-6"></div>
+            <p className="text-gray-600 max-w-3xl mx-auto mb-2">
+              Discover these beautiful plants that are perfectly suited for KL's tropical climate and urban spaces
+            </p>
+            <div className="flex items-center justify-center text-sm text-gray-500 mt-3">
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>Swipe left or right to see more plants</span>
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
           
-          {/* Single row layout for featured plants */}
-          <div className="flex flex-nowrap overflow-x-auto pb-4 gap-4 hide-scrollbar">
-            {[26, 49, 19, 30, 40].map((id) => (
-              <div key={id} className="flex-none w-64 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="h-48 bg-gray-200">
-                  <img src={`/assets/plants_images/${id}.jpg`} alt={plantData[id]?.plant_name || `Plant ${id}`} className="w-full h-full object-cover" />
+          {/* Plants carousel - simplified with smaller cards */}
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div 
+              id="featured-plants-container"
+              className="flex flex-nowrap overflow-x-auto gap-4 pb-6 pt-2 px-2 hide-scrollbar"
+            >
+              {[26, 49, 19, 30, 40].map((id) => (
+                <div 
+                  key={id} 
+                  className="flex-none w-64 bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 border border-gray-100"
+                >
+                  {/* Card content without hover scale effect */}
+                  <div className="relative h-48 overflow-hidden bg-green-100">
+                    <img 
+                      src={`/assets/plants_images/${id}.jpg`} 
+                      alt={plantData[id]?.plant_name || `Plant ${id}`} 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black/70 to-transparent">
+                      <h3 className="text-xl font-bold text-white drop-shadow-sm">
+                        {plantData[id]?.plant_name || "Loading..."}
+                      </h3>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4">
+                    {/* Plant type tags */}
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {plantData[id]?.plant_type && (
+                        <span className="px-2 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
+                          {plantData[id]?.plant_type}
+                        </span>
+                      )}
+                      {plantData[id]?.light_preference && (
+                        <span className="px-2 py-1 bg-yellow-50 text-yellow-700 text-xs font-medium rounded-full">
+                          {plantData[id]?.light_preference}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Plant description */}
+                    <p className="text-gray-600 mt-2 mb-3 line-clamp-3 text-sm">
+                      {plantData[id]?.plant_description?.substring(0, 100) + "..." || "Loading plant details..."}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {plantData[id]?.plant_name || "Loading..."}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                    {plantData[id]?.plant_description?.substring(0, 80) + "..." || "Loading plant details..."}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          <div className="text-center mt-10">
-            <Link to="/gallery" className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition duration-300">
-              View All Plants
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {/* Call to action */}
+          <div className="text-center mt-12">
+            <Link 
+              to="/gallery" 
+              className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full shadow-md hover:shadow-lg transition duration-300"
+            >
+              Explore All Plants
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
           </div>
 
-          {/* Add this style to hide scrollbar but allow scrolling */}
-          {/* CSS for hiding scrollbar */}
+          {/* hide scrollbar but allow scrolling */}
           <style dangerouslySetInnerHTML={{
             __html: `
               .hide-scrollbar::-webkit-scrollbar {
@@ -351,11 +403,17 @@ const HomePage = () => {
                 -ms-overflow-style: none;
                 scrollbar-width: none;
               }
-              .line-clamp-2 {
+              .line-clamp-3 {
                 display: -webkit-box;
-                -webkit-line-clamp: 2;
+                -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
+              }
+              .snap-x {
+                scroll-snap-type: x mandatory;
+              }
+              .snap-center {
+                scroll-snap-align: center;
               }
             `
           }} />
