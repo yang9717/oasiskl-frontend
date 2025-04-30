@@ -1,14 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CircleArrowLeft, Camera, X, Upload, MessageCircleWarning, Zap, Leaf, Droplet, UserX } from 'lucide-react';
+import { CircleArrowLeft, Camera, X, CircleHelp, Upload, MessageCircleWarning, Zap, Leaf, Droplet, UserX } from 'lucide-react';
+import useTitle from '../../hooks/useTitle';
 
 const PlantIdentifier = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null); // <-- Add this
-  const [prediction, setPrediction] = useState(null);
-  const [loading, setLoading] = useState(false);
+  useTitle('OasisKL - Plant Identifier');
 
-  const API_BASE_URL = '/api'
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [predictionId, setPredictionId] = useState(null);
+  const [predictionConf, setPredictionConf] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [plantDetails, setPlantDetails] = useState(null);
+
+  const API_BASE_URL = '/api'; // Deploy URL
+  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+
+  useEffect(() => {
+
+    // Only fetch plant details if we have a prediction ID
+    if (predictionId) {
+      const fetchPlantDetails = async () => {
+        try {
+          const response = await fetch(`${API_BASE_URL}/plant/${predictionId}`);
+          const data = await response.json();
+          setPlantDetails(data.plantDetails);
+        } catch (error) {
+          console.error('Error fetching plant details:', error);
+        }
+      };
+      
+      fetchPlantDetails();
+    } else {
+      // Reset plant details when no prediction is available
+      setPlantDetails(null);
+    }
+  }, [predictionId, API_BASE_URL]); // Re-run when predictionId changes
 
   const identifyPlant = async () => {
     if (!selectedFile) {
@@ -27,7 +54,8 @@ const PlantIdentifier = () => {
         body: formData
       });
       const data = await response.json();
-      setPrediction(data.prediction);
+      setPredictionId(data.prediction.class);
+      setPredictionConf(data.prediction.confidence);
     } catch (error) {
       console.error('Error identifying plant:', error);
     } finally {
@@ -45,8 +73,9 @@ const PlantIdentifier = () => {
 
   const resetImage = () => {
     setSelectedImage(null);
-    setSelectedFile(null); // Reset the file too
-    setPrediction(null);   // Reset prediction
+    setSelectedFile(null);
+    setPredictionId(null); 
+    setPredictionConf(null);
   };
 
   return (
@@ -99,7 +128,7 @@ const PlantIdentifier = () => {
                   <ul className="space-y-2 text-gray-700">
                     <li className="flex items-center">
                       <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
-                      <span>Frame a single leaf or flower in the center of the view</span>
+                      <span>Frame the plant in the center of the view</span>
                     </li>
                     <li className="flex items-center">
                       <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
@@ -168,10 +197,53 @@ const PlantIdentifier = () => {
             >
               {loading ? "Identifying...." : "Identify Now! 🔍"}
             </button>
+            
+            {/* Prediction Result */}
+            {predictionId && (
+              <div className="mt-8 rounded-lg shadow-md overflow-hidden border border-gray-200 mt-12">
+                <div className="bg-green-600 px-4 py-3 text-white flex items-center">
+                  <Leaf className="mr-2" size={24} />
+                  <h2 className="text-xl font-bold">Plant Identified</h2>
+                </div>
+                
+                <div className="p-6 bg-white">
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-gray-800">{plantDetails ? plantDetails.plant_name : predictionId}
+                    </h3>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <div className="flex items-center mb-2">
+                      <span className="text-gray-700 font-medium">Confidence Level:</span>
+                      <span className="ml-2 text-lg font-bold">{predictionConf}%</span>
+                    </div>
+                    
+                    <div className="w-full bg-gray-200 rounded-full h-4 mt-1">
+                      <div 
+                        className="h-4 rounded-full bg-green-600" 
+                        style={{ width: `${predictionConf}%` }}
+                      ></div>
+                    </div>
+                  </div>
 
-            {prediction && (
-              <div className="mt-8 text-2xl text-green-700 font-semibold">
-                🌿 Identified Plant: {prediction}
+                  <div className="mt-6 space-y-3">
+                    <Link 
+                      to={`/plants/${predictionId}`} 
+                      className="flex items-center p-3 bg-green-50 text-green-700 rounded-lg border border-green-200 hover:bg-green-100 transition-colors"
+                    >
+                      <CircleHelp size={20} className="mr-2" />
+                      <span className="font-medium">Want to know more about this plant? Click here!</span>
+                    </Link>
+                    
+                    <Link 
+                      to={`/care-guides/${predictionId}`} 
+                      className="flex items-center p-3 bg-blue-50 text-blue-700 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors"
+                    >
+                      <Droplet size={20} className="mr-2" />
+                      <span className="font-medium">Want to keep this plant in your house? Click here!</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
             )}
           </div>
