@@ -1,6 +1,6 @@
 export const saveNavigationContext = (sourceType, sourceId = null) => {
     const context = {
-      sourceType, // 'space', 'gallery', 'care'
+      sourceType, // 'space', 'gallery', 'care', 'identify'
       sourceId,   // ID of the source (if applicable)
       timestamp: Date.now()
     };

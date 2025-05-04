@@ -169,7 +169,6 @@ const PlantDetails = () => {
 
   // When going to care page, preserve the original navigation context
   const handleCareClick = () => {
-    // We don't need to change the context, it persists in localStorage
   };
   
   // Function to handle back navigation based on context
@@ -188,6 +187,9 @@ const PlantDetails = () => {
         break;
       case 'gallery':
         navigate('/gallery');
+        break;
+      case 'identify':
+        navigate('/identify');
         break;
       case 'care':
         // If we came from care, we should go back to the original source
@@ -212,6 +214,8 @@ const PlantDetails = () => {
         return 'Back to Green Space';
       case 'gallery':
         return 'Back to Gallery';
+      case 'identify':
+        return 'Back to Plant Identifier';
       default:
         return 'Back';
     }

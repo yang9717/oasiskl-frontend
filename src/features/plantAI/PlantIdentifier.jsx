@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CircleArrowLeft, Camera, X, CircleHelp, Upload, MessageCircleWarning, Zap, Leaf, Droplet, UserX } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
+import { saveNavigationContext } from '../../hooks/navigationContext';
 
 const PlantIdentifier = () => {
   useTitle('OasisKL - Plant Identifier');
@@ -80,6 +81,10 @@ const PlantIdentifier = () => {
     setSelectedFile(null);
     setPredictionId(null); 
     setPredictionConf(null);
+  };
+
+  const handlePlantClick = () => {
+    saveNavigationContext('identify');
   };
 
   return (
@@ -233,6 +238,7 @@ const PlantIdentifier = () => {
                   <div className="mt-6 space-y-3">
                     <Link 
                       to={`/plants/${predictionId}`} 
+                      onClick={handlePlantClick}
                       className="flex items-center p-3 bg-green-50 text-green-700 rounded-lg border border-green-200 hover:bg-green-100 transition-colors"
                     >
                       <CircleHelp size={20} className="mr-2" />
