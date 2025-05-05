@@ -16,8 +16,8 @@ const PlantDetails = () => {
   const navigate = useNavigate();
   const context = getNavigationContext();
 
-  const API_BASE_URL = '/api'; // Deploy URL
-  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  // const API_BASE_URL = '/api'; // Deploy URL
+  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   // Fetch plant data from backend
   useEffect(() => {
@@ -177,7 +177,7 @@ const PlantDetails = () => {
     
     if (!context) {
       // Fallback if no context exists
-      navigate('/spaces');
+      navigate('/');
       return;
     }
     
@@ -189,7 +189,7 @@ const PlantDetails = () => {
         navigate('/gallery');
         break;
       case 'identify':
-        navigate('/identify');
+        navigate('/plant-identifier');
         break;
       case 'care':
         // If we came from care, we should go back to the original source
