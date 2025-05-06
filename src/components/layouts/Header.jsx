@@ -125,6 +125,11 @@ const Header = () => {
             )}
           </li>
           <li>
+            <Link to="/plant-recommender" className="text-white hover:text-green-300 transition duration-200">
+              Plant Recommender
+            </Link>
+          </li>
+          <li>
             <Link to="/plant-identifier" className="text-white hover:text-green-300 transition duration-200">
               Plant Identifier
             </Link>
