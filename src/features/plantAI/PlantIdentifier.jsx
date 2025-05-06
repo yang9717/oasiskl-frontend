@@ -164,7 +164,7 @@ const PlantIdentifier = () => {
             </div>
 
             {/* Image Upload Area */}
-            <div className="mb-12">
+            <div className="mb-12" id="upload-section">
               <div className="relative border-3 border-dashed border-green-500 rounded-2xl p-8 bg-gradient-to-b from-green-50 to-white mb-6 shadow-lg">
                 {selectedImage ? (
                   <div className="relative">
@@ -215,176 +215,204 @@ const PlantIdentifier = () => {
             </button>
             
             {/* Prediction Result Section */}
-            {predictionId && (
-              <div className="mt-12 rounded-xl shadow-lg overflow-hidden border border-gray-200">
-                {/* Header */}
-                <div className="bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 text-white flex items-center justify-between">
-                  <div className="flex items-center">
-                    <h2 className="text-2xl font-bold">Plant Identified!</h2>
-                  </div>
-                  {/* Confidence Badge */}
-                  {predictionConf && (
-                    <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      predictionConf > 85 ? 'bg-green-100 text-green-800' : 
-                      predictionConf > 60 ? 'bg-yellow-100 text-yellow-800' : 
-                      predictionConf > 40 ? 'bg-orange-100 text-orange-800' : 
-                      'bg-red-100 text-red-800'
-                    }`}>
-                      {predictionConf > 85 ? 'High Confidence' : 
-                      predictionConf > 60 ? 'Medium Confidence' : 
-                      predictionConf > 40 ? 'Low Confidence' : 
-                      'Very Low Confidence'}
-                    </div>
-                  )}
-                </div>
-                
-                <div className="p-0 bg-white">
-                  {/* Main Content Area */}
-                  <div className="flex flex-col md:flex-row">
-                    {/* Left Column - Plant Image */}
-                    <div className="w-full md:w-1/3 p-6 bg-white flex justify-center items-center">
-                      <div className="relative">
-                        {selectedImage && (
-                          <img 
-                            src={selectedImage} 
-                            alt="Selected plant" 
-                            className="h-40 w-40 object-cover rounded-lg shadow-md border-2 border-green-100"
-                          />
-                        )}
-                        <div className="absolute -bottom-3 -right-3 bg-green-500 text-white rounded-full p-2 shadow-md">
-                          <Leaf className="h-5 w-5" />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Right Column - Plant Details */}
-                    <div className="w-full md:w-2/3 p-6">
-                      {/* Plant Name and Taxonomy */}
-                      <div className="border-b border-gray-100 pb-4 mb-4">
-                        <h3 className="text-3xl font-bold text-gray-800 mb-2">
-                          {plantDetails ? plantDetails.plant_name : predictionId}
-                        </h3>
-                        
-                        {/* Plant Taxonomy Information */}
-                        {plantDetails && (
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                            {plantDetails.plant_family && (
-                              <div className="bg-green-50 p-2 rounded-lg">
-                                <span className="text-xs text-green-600 uppercase font-semibold">Family</span>
-                                <div className="text-gray-700 italic">{plantDetails.plant_family}</div>
-                              </div>
-                            )}
-                            {plantDetails.plant_genus && (
-                              <div className="bg-green-50 p-2 rounded-lg">
-                                <span className="text-xs text-green-600 uppercase font-semibold">Genus</span>
-                                <div className="text-gray-700 italic">{plantDetails.plant_genus}</div>
-                              </div>
-                            )}
-                            {plantDetails.plant_species && (
-                              <div className="bg-green-50 p-2 rounded-lg">
-                                <span className="text-xs text-green-600 uppercase font-semibold">Species</span>
-                                <div className="text-gray-700 italic">{plantDetails.plant_species}</div>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                      
-                      {/* Confidence Meter */}
-                      <div className="mb-6">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-gray-700 font-medium">AI Confidence Level:</span>
-                          <span className={`text-lg font-bold ${
-                            predictionConf > 85 ? 'text-green-600' : 
-                            predictionConf > 60 ? 'text-yellow-600' : 
-                            predictionConf > 40 ? 'text-orange-600' : 
-                            'text-red-600'
-                          }`}>
-                            {predictionConf}%
-                          </span>
-                        </div>
-                        
-                        <div className="w-full bg-gray-200 rounded-full h-3">
-                          <div 
-                            className={`h-3 rounded-full ${
-                              predictionConf > 85 ? 'bg-green-500' : 
-                              predictionConf > 60 ? 'bg-yellow-500' : 
-                              predictionConf > 40 ? 'bg-orange-500' : 
-                              'bg-red-500'
-                            }`}
-                            style={{ width: `${predictionConf}%` }}
-                          ></div>
-                        </div>
-                        
-                        {/* Confidence Explanation */}
-                        <div className="mt-3 p-3 rounded-lg text-sm bg-gray-50 border border-gray-200">
-                          {predictionConf > 85 ? (
-                            <p>
-                              <span className="font-semibold text-green-600">High confidence:</span> The model is very confident.
-                              <br />It's very likely that the prediction is correct.
-                            </p>
-                          ) : predictionConf > 60 ? (
-                            <p>
-                              <span className="font-semibold text-yellow-600">Medium confidence:</span> The model is confident, but there is a margin of error. 
-                              <br />We recommend double-checking the result.
-                            </p>
-                          ) : predictionConf > 40 ? (
-                            <p>
-                              <span className="font-semibold text-orange-600">Low confidence:</span> The model is moderately confident. 
-                              <br />This could be due to the plant not being in our database or poor image quality.
-                            </p>
-                          ) : (
-                            <p>
-                              <span className="font-semibold text-red-600">Very low confidence:</span> The model is not confident at all. 
-                              <br />Most likely the image is not of a plant or is unclear. 
-                              <br />Please try uploading a different image.
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Action Buttons */}
-                  <div className="px-6 pb-6 pt-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <Link 
-                        to={`/plants/${predictionId}`} 
-                        onClick={handlePlantClick}
-                        className="group flex flex-col items-center justify-center p-6 bg-gradient-to-br from-green-50 to-green-100 text-green-700 rounded-xl border border-green-200 hover:shadow-lg transition-all duration-200"
-                      >
-                        <div className="w-14 h-14 mb-3 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                          <CircleHelp size={28} className="text-green-600" />
-                        </div>
-                        <span className="font-medium text-center text-lg">Curious about this plant?</span>
-                        <span className="text-sm text-green-600 font-semibold mt-1 flex items-center">
-                          Tap to explore
-                          <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </Link>
-                      
-                      <Link 
-                        to={`/care-guides/${predictionId}`} 
-                        className="group flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-700 rounded-xl border border-blue-200 hover:shadow-lg transition-all duration-200"
-                      >
-                        <div className="w-14 h-14 mb-3 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                          <Droplet size={28} className="text-blue-600" />
-                        </div>
-                        <span className="font-medium text-center text-lg">Want to grow this beauty at home?</span>
-                        <span className="text-sm text-blue-600 font-semibold mt-1 flex items-center">
-                          Get your care guide
-                          <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </Link>
-                    </div>
-                  </div>
+{/* Prediction Result Section */}
+{predictionId && (
+  <div className="mt-12 rounded-xl shadow-lg overflow-hidden border border-gray-200">
+    {/* Header */}
+    <div className="bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 text-white flex items-center justify-between">
+      <div className="flex items-center">
+        <h2 className="text-2xl font-bold">
+          {predictionConf > 40 ? "Plant Identified!" : "Oops! We couldn't identify this plant."}
+        </h2>
+      </div>
+      {/* Confidence Badge */}
+      {predictionConf && (
+        <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+          predictionConf > 85 ? 'bg-green-100 text-green-800' : 
+          predictionConf > 60 ? 'bg-yellow-100 text-yellow-800' : 
+          predictionConf > 40 ? 'bg-orange-100 text-orange-800' : 
+          'bg-red-100 text-red-800'
+        }`}>
+          {predictionConf > 85 ? 'High Confidence' : 
+          predictionConf > 60 ? 'Medium Confidence' : 
+          predictionConf > 40 ? 'Low Confidence' : 
+          'Very Low Confidence'}
+        </div>
+      )}
+    </div>
+    
+    <div className="p-0 bg-white">
+      {predictionConf > 40 ? (
+        // Show plant identification results if confidence > 40
+        <>
+          {/* Main Content Area */}
+          <div className="flex flex-col md:flex-row">
+            {/* Left Column - Plant Image */}
+            <div className="w-full md:w-1/3 p-6 bg-white flex justify-center items-center">
+              <div className="relative">
+                {selectedImage && (
+                  <img 
+                    src={selectedImage} 
+                    alt="Selected plant" 
+                    className="h-40 w-40 object-cover rounded-lg shadow-md border-2 border-green-100"
+                  />
+                )}
+                <div className="absolute -bottom-3 -right-3 bg-green-500 text-white rounded-full p-2 shadow-md">
+                  <Leaf className="h-5 w-5" />
                 </div>
               </div>
-            )}
+            </div>
+            
+            {/* Right Column - Plant Details */}
+            <div className="w-full md:w-2/3 p-6">
+              {/* Plant Name and Taxonomy */}
+              <div className="border-b border-gray-100 pb-4 mb-4">
+                <h3 className="text-3xl font-bold text-gray-800 mb-2">
+                  {plantDetails ? plantDetails.plant_name : predictionId}
+                </h3>
+                
+                {/* Plant Taxonomy Information */}
+                {plantDetails && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                    {plantDetails.plant_family && (
+                      <div className="bg-green-50 p-2 rounded-lg">
+                        <span className="text-xs text-green-600 uppercase font-semibold">Family</span>
+                        <div className="text-gray-700 italic">{plantDetails.plant_family}</div>
+                      </div>
+                    )}
+                    {plantDetails.plant_genus && (
+                      <div className="bg-green-50 p-2 rounded-lg">
+                        <span className="text-xs text-green-600 uppercase font-semibold">Genus</span>
+                        <div className="text-gray-700 italic">{plantDetails.plant_genus}</div>
+                      </div>
+                    )}
+                    {plantDetails.plant_species && (
+                      <div className="bg-green-50 p-2 rounded-lg">
+                        <span className="text-xs text-green-600 uppercase font-semibold">Species</span>
+                        <div className="text-gray-700 italic">{plantDetails.plant_species}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              {/* Confidence Meter */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-700 font-medium">AI Confidence Level:</span>
+                  <span className={`text-lg font-bold ${
+                    predictionConf > 85 ? 'text-green-600' : 
+                    predictionConf > 60 ? 'text-yellow-600' : 
+                    'text-orange-600'
+                  }`}>
+                    {predictionConf}%
+                  </span>
+                </div>
+                
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className={`h-3 rounded-full ${
+                      predictionConf > 85 ? 'bg-green-500' : 
+                      predictionConf > 60 ? 'bg-yellow-500' : 
+                      'bg-orange-500'
+                    }`}
+                    style={{ width: `${predictionConf}%` }}
+                  ></div>
+                </div>
+                
+                {/* Confidence Explanation */}
+                <div className="mt-3 p-3 rounded-lg text-sm bg-gray-50 border border-gray-200">
+                  {predictionConf > 85 ? (
+                    <p>
+                      <span className="font-semibold text-green-600">High confidence:</span> The model is very confident.
+                      <br />It's very likely that the prediction is correct.
+                    </p>
+                  ) : predictionConf > 60 ? (
+                    <p>
+                      <span className="font-semibold text-yellow-600">Medium confidence:</span> The model is confident, but there is a margin of error. 
+                      <br />We recommend double-checking the result.
+                    </p>
+                  ) : (
+                    <p>
+                      <span className="font-semibold text-orange-600">Low confidence:</span> The model is moderately confident. 
+                      <br />This could be due to the plant not being in our database or poor image quality.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Action Buttons */}
+          <div className="px-6 pb-6 pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link 
+                to={`/plants/${predictionId}`} 
+                onClick={handlePlantClick}
+                className="group flex flex-col items-center justify-center p-6 bg-gradient-to-br from-green-50 to-green-100 text-green-700 rounded-xl border border-green-200 hover:shadow-lg transition-all duration-200"
+              >
+                <div className="w-14 h-14 mb-3 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                  <CircleHelp size={28} className="text-green-600" />
+                </div>
+                <span className="font-medium text-center text-lg">Curious about this plant?</span>
+                <span className="text-sm text-green-600 font-semibold mt-1 flex items-center">
+                  Tap to explore
+                  <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+              
+              <Link 
+                to={`/care-guides/${predictionId}`} 
+                className="group flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-700 rounded-xl border border-blue-200 hover:shadow-lg transition-all duration-200"
+              >
+                <div className="w-14 h-14 mb-3 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                  <Droplet size={28} className="text-blue-600" />
+                </div>
+                <span className="font-medium text-center text-lg">Want to grow this beauty at home?</span>
+                <span className="text-sm text-blue-600 font-semibold mt-1 flex items-center">
+                  Get your care guide
+                  <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+            </div>
+          </div>
+        </>
+      ) : (
+        // Show message when confidence is low (≤ 40%)
+        <div className="p-6">
+          <div className="flex flex-col items-center text-center mb-8">
+            <div className="bg-red-100 p-4 rounded-full mb-4">
+              <MessageCircleWarning className="h-12 w-12 text-red-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">We couldn't identify this plant with confidence</h3>
+            <p className="text-gray-600 max-w-lg">
+              The image quality or angle might be making it difficult for our AI to correctly identify this plant.
+              The current confidence level is only <span className="font-semibold text-red-600">{predictionConf}%</span>, 
+              which is too low for a reliable identification.
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <button 
+              onClick={() => {
+                resetImage();
+                // Scroll to upload section
+                document.getElementById('upload-section').scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-10 rounded-full text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Try Again with a New Photo
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+)}
           </div>
         </div>
       </section>
