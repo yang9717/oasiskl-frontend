@@ -191,6 +191,9 @@ const PlantDetails = () => {
       case 'identify':
         navigate('/plant-identifier');
         break;
+      case 'recommender':
+        navigate('/plant-recommender');
+        break;
       case 'care':
         // If we came from care, we should go back to the original source
         // The context would still have the original 'space' or 'gallery' value
@@ -216,6 +219,8 @@ const PlantDetails = () => {
         return 'Back to Gallery';
       case 'identify':
         return 'Back to Plant Identifier';
+      case 'recommender':
+        return 'Back to Plant Recommender';
       default:
         return 'Back';
     }
