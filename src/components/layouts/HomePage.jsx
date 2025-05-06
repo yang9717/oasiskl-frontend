@@ -92,8 +92,7 @@ const HomePage = () => {
       <section id="what-we-offer" className="py-20 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-green-50 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-70"></div>
-        <div className="absolute top-1/4 right-10 w-20 h-20 bg-orange-50 rounded-full opacity-80"></div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-4">Our Services</span>
@@ -230,30 +229,32 @@ const HomePage = () => {
                   </div>
                 </div>
                 
-                {/* Plant Recommender Feature - Coming Soon */}
-                <div className="group bg-gray-50 rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-green-100">
+                {/* Plant Recommender */}
+                <div className="group bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl border border-gray-100 hover:border-green-200">
                   <div className="md:flex">
-                    <div className="md:w-1/3 h-48 md:h-auto relative overflow-hidden bg-gray-100">
-                      <div className="absolute inset-0 bg-green-50 opacity-30"></div>
-                      <img src="/assets/careguides/galleryguide.jpg" alt="Plant Recommender" className="w-full h-full object-cover opacity-40" />
+                    <div className="md:w-1/3 h-48 md:h-auto relative overflow-hidden">
+                      <img src="/assets/careguides/recommender.jpg" alt="Plant Recommender" className="w-full h-full object-cover transition-transform duration-500" />
                     </div>
                     <div className="p-6 md:w-2/3 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center mb-2">
-                          <HelpCircle className="w-5 h-5 text-green-400 mr-2" />
-                          <h4 className="text-xl font-bold text-gray-700">Plant Recommender</h4>
-                          <span className="ml-2 px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">Coming Soon</span>
+                          <HelpCircle className="w-5 h-5 text-green-500 mr-2" />
+                          <h4 className="text-xl font-bold text-gray-800">Plant Recommender</h4>
+                          <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">New</span>
                         </div>
-                        <p className="text-gray-500 mb-4">
+                        <p className="text-gray-600 mb-4">
                           Answer 3 simple questions and discover the perfect indoor plants for your space
                         </p>
                       </div>
-                      <span className="inline-flex items-center text-green-400 font-medium">
-                        STAY TUNED
+                      <Link
+                        to="/plant-recommender"
+                        className="inline-flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition duration-300 w-fit"
+                      >
+                        Try Recommender
                         <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
-                      </span>
+                      </Link>
                     </div>
                   </div>
                 </div>
