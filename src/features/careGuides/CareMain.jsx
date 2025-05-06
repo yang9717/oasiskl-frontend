@@ -303,6 +303,48 @@ const CareMain = () => {
         </div>
       </section>
 
+      {/* Plant Recommender Section */}
+      <section className="py-16 -mt-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto bg-orange-50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg">
+            <div className="flex flex-col md:flex-row items-center">
+              <div className="md:w-2/5 p-4">
+                <div className="rounded-xl overflow-hidden h-64 relative">
+                  <img 
+                    src="/assets/careguides/recommender.jpg" 
+                    alt="Plant recommendation tool" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              
+              <div className="md:w-3/5 p-8">
+                <h2 className="text-4xl font-bold mb-3 text-gray-800">
+                  Can't Decide? <br/>
+                  <span className="text-orange-600">Try Our Plant Recommender</span>
+                </h2>
+                
+                <hr className="w-24 border-2 border-orange-600 mb-4" />
+                
+                <p className="text-gray-600 mb-6">
+                  Answer 3 questions about your space and care routine to get 3 personalized picks!
+                </p>
+                
+                <a 
+                  href="/plant-recommender" 
+                  className="inline-flex items-center justify-center bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-8 rounded-full transition-colors shadow-md"
+                >
+                  Start the Recommender
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Blog And Articles Section */}
       <section className="py-16 px-4 bg-orange-50">
         <div className="container mx-auto max-w-6xl">
