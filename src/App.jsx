@@ -13,6 +13,7 @@ import HydroponicGuide from './features/careGuides/HydroponicGuide';
 import CareMain from './features/careGuides/CareMain';
 import PlantIdentifier from './features/plantAI/PlantIdentifier';
 import GeneralCare from './features/careGuides/GeneralCare';
+import PlantRecommender from './features/recommender/PlantRecommender';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="hydroponics" element={<HydroponicGuide />} />
         </Route>
         <Route path="/plant-identifier" element={<PlantIdentifier />} />
+        <Route path="/plant-recommender" element={<PlantRecommender />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
