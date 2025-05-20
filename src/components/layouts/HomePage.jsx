@@ -53,7 +53,7 @@ const HomePage = () => {
           <h1 className="text-white text-4xl text-[4.125rem] font-bold mb-8">
             <span className="block">Embrace</span>
             <span className="block mt-2 relative">
-              <span className="bg-gradient-to-r from-green-500 to-green-300 bg-clip-text text-transparent">Urban Oasis</span>
+              <span className="bg-gradient-to-r from-green-500 to-green-300 bg-clip-text text-transparent">Green Spaces</span>
               <span className="mx-2">&</span>
               <span className="bg-gradient-to-r from-green-300 to-teal-400 bg-clip-text text-transparent">Vibrant Biodiversity</span>
             </span>
@@ -161,7 +161,6 @@ const HomePage = () => {
                         <div className="flex items-center mb-2">
                           <Leaf className="w-5 h-5 text-green-500 mr-2" />
                           <h4 className="text-xl font-bold text-gray-800">Grow Your Green Corner</h4>
-                          <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">New</span>
                         </div>
                         <p className="text-gray-600 mb-4">
                           Tailored guides and DIY tips for creating your personal urban oasis in KL
@@ -210,7 +209,6 @@ const HomePage = () => {
                         <div className="flex items-center mb-2">
                           <BookOpen className="w-5 h-5 text-green-500 mr-2" />
                           <h4 className="text-xl font-bold text-gray-800">Plant Gallery</h4>
-                          <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">New</span>
                         </div>
                         <p className="text-gray-600 mb-4">
                           Browse our curated collection of plants that thrive in KL's unique climate
@@ -240,7 +238,6 @@ const HomePage = () => {
                         <div className="flex items-center mb-2">
                           <HelpCircle className="w-5 h-5 text-green-500 mr-2" />
                           <h4 className="text-xl font-bold text-gray-800">Plant Recommender</h4>
-                          <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">New</span>
                         </div>
                         <p className="text-gray-600 mb-4">
                           Answer 3 simple questions and discover the perfect indoor plants for your space
@@ -273,7 +270,6 @@ const HomePage = () => {
                   <div className="flex items-center mb-3">
                     <Camera className="w-6 h-6 text-green-500 mr-2" />
                     <h3 className="text-2xl font-bold text-gray-800">AI Plant Identifier</h3>
-                    <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">New</span>
                   </div>
                   
                   <p className="text-gray-600 mb-4">
