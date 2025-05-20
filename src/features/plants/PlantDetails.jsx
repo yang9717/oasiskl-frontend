@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { CircleArrowLeft, Leaf, MapPin, SearchCheck, Info, BookOpen, Droplet, Sun, Scissors } from 'lucide-react';
+import { CircleArrowLeft, Leaf, MapPin, SearchCheck, Info, BookOpen } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
 import { getNavigationContext } from '../../hooks/navigationContext';
 
@@ -169,6 +169,7 @@ const PlantDetails = () => {
 
   // When going to care page, preserve the original navigation context
   const handleCareClick = () => {
+    // We don't need to change the context, it persists in localStorage
   };
   
   // Function to handle back navigation based on context
@@ -222,7 +223,7 @@ const PlantDetails = () => {
       case 'recommender':
         return 'Back to Plant Recommender';
       default:
-        return 'Back';
+        return 'Back to Homepage';
     }
   };
 
@@ -321,45 +322,6 @@ const PlantDetails = () => {
           </div>
         </div>
       </div>
-      
-      {/* Propagation Section */}
-      <div className="mt-10">
-        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 shadow-sm">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
-              <Leaf className="w-8 h-8 text-green-600" />
-            </div>
-            <div className="ml-5">
-              <h2 className="text-2xl font-bold text-gray-800">About {plant.plant_name} Propagation</h2>
-              <p className="text-gray-700 mt-1">Information on how this plant is typically propagated and cultivated.</p>
-            </div>
-          </div>
-        </div>
-        <div className="mt-6">
-          {renderPropagationInfo(plant.plant_propagation)}
-        </div>
-      </div>
-
-      {/* Care Details Link Banner */}
-      <div className="mt-10 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 shadow-sm">
-        <div className="flex items-center">
-          <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
-            <Leaf className="w-8 h-8 text-orange-600" />
-          </div>
-          <div className="ml-5 flex-grow">
-            <h2 className="text-2xl font-bold text-gray-800">Want to plant {plant.plant_name} in your own garden?</h2>
-            <p className="text-gray-700 mt-1">Learn how to properly care for this plant with our detailed guide!</p>
-          </div>
-          <Link 
-            to={`/care-guides/${plant.plant_id}`}
-            onClick={handleCareClick}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center"
-          >
-            <BookOpen className="w-4 h-4 mr-2" />
-            View Care Guide
-          </Link>
-        </div>
-      </div>
 
       {/* Where to Find This Plant Section */}
       {otherSpaces && otherSpaces.length > 0 && (
@@ -410,6 +372,45 @@ const PlantDetails = () => {
           </div>
         </div>
       )}
+      
+      {/* Propagation Section */}
+      <div className="mt-10">
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 shadow-sm">
+          <div className="flex items-center">
+            <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
+              <Leaf className="w-8 h-8 text-green-600" />
+            </div>
+            <div className="ml-5">
+              <h2 className="text-2xl font-bold text-gray-800">About {plant.plant_name} Propagation</h2>
+              <p className="text-gray-700 mt-1">Information on how this plant is typically propagated and cultivated.</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-6">
+          {renderPropagationInfo(plant.plant_propagation)}
+        </div>
+      </div>
+
+      {/* Care Details Link Banner */}
+      <div className="mt-10 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 shadow-sm">
+        <div className="flex items-center">
+          <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
+            <Leaf className="w-8 h-8 text-orange-600" />
+          </div>
+          <div className="ml-5 flex-grow">
+            <h2 className="text-2xl font-bold text-gray-800">Want to plant {plant.plant_name} in your own garden?</h2>
+            <p className="text-gray-700 mt-1">Learn how to properly care for this plant with our detailed guide!</p>
+          </div>
+          <Link 
+            to={`/care-guides/${plant.plant_id}`}
+            onClick={handleCareClick}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center"
+          >
+            <BookOpen className="w-4 h-4 mr-2" />
+            View Care Guide
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

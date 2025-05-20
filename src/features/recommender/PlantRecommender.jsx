@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { CircleArrowLeft, Leaf, Heart, Flower, Clock, Sprout, Apple, ArrowRight, Scissors, BookOpen,
          ArrowLeft, Sun, CloudAlert, CheckCircle2, AlertCircle, Home, HelpCircle, LampCeiling } from "lucide-react";
@@ -23,6 +23,10 @@ const PlantRecommender = () => {
 
   // const API_BASE_URL = '/api'; // Deploy URL
   const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+
+  const handleCareClick = () => {
+    saveNavigationContext('recommender');
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -308,9 +312,9 @@ const PlantRecommender = () => {
       );
     }
 
-    const handlePlantClick = () => {
-        saveNavigationContext('recommender');
-    };
+  const handlePlantClick = () => {
+    saveNavigationContext('recommender');
+  };
     
     return (
       <div>
@@ -631,6 +635,7 @@ const PlantRecommender = () => {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link 
+                    onClick={handleCareClick}
                     to="/guides/potted-soil" 
                     className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-full transition-colors shadow-md"
                   >
@@ -638,6 +643,7 @@ const PlantRecommender = () => {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                   <Link 
+                    onClick={handleCareClick}
                     to="/guides/hydroponics" 
                     className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-full transition-colors shadow-md"
                   >

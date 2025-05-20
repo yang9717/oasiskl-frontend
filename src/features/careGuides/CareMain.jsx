@@ -1,11 +1,23 @@
-import { React, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { CircleArrowLeft, Leaf, ThermometerSun, Heart, Sun, Sprout, ShoppingBag, ChevronsDown } from "lucide-react";
+import useTitle from '../../hooks/useTitle';
+import { saveNavigationContext } from '../../hooks/navigationContext';
 
 const CareMain = () => {
 
+  useTitle('OasisKL - Grow Your Green Corner');
+
   const [videoPlaying, setVideoPlaying] = useState(false);
   const videoId = "l2itHbx8lkY";
+
+  const handleCareClick = () => {
+    saveNavigationContext('grow');
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="w-full">
@@ -188,9 +200,12 @@ const CareMain = () => {
               
               <div className="bg-green-600 p-6 text-center text-white">
                 <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">soil-based garden</span></h4>
-                <a href="/guides/potted-soil" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
+                <Link 
+                  onClick={handleCareClick}
+                  to="/guides/potted-soil"
+                  className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
                   Learn How
-                </a>
+                </Link>
               </div>
             </div>
             {/* Hydroponics Card */}
@@ -252,9 +267,12 @@ const CareMain = () => {
               
               <div className="bg-green-600 p-6 text-center text-white">
                 <h4 className="text-white text-xl font-medium mb-3">Get tips for your <span className="text-orange-200 font-semibold">hydroponic garden</span></h4>
-                <a href="/guides/hydroponics" className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
+                <Link
+                  onClick={handleCareClick}
+                  to="/guides/hydroponics"
+                  className="inline-block bg-white text-green-600 px-6 py-2 rounded-full font-medium hover:bg-green-50 transition-colors shadow-md">
                   Learn How
-                </a>
+                </Link>
               </div>
             </div>
           </div>

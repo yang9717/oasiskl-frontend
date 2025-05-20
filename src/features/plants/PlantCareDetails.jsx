@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CircleArrowLeft, Droplet, Sun, Scissors, Home, Calendar, ThermometerSun, Leaf, SearchCheck, BadgeInfo, NotebookPen } from 'lucide-react';
 import useTitle from '../../hooks/useTitle';
+import { getNavigationContext, saveNavigationContext } from '../../hooks/navigationContext';
 
 
 const PlantCareGuide = () => {
@@ -11,10 +12,12 @@ const PlantCareGuide = () => {
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const context = saveNavigationContext();
   
   // API URL
-  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
-  const API_BASE_URL = '/api'; // Deploy URL
+  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  // const API_BASE_URL = '/api'; // Deploy URL
   
   // Fetch plant data
   useEffect(() => {
@@ -100,6 +103,10 @@ const PlantCareGuide = () => {
       </div>
     );
   }
+
+  const handleCareClick = () => {
+      saveNavigationContext('plant', id);
+    };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -350,7 +357,8 @@ const PlantCareGuide = () => {
                       <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">Step 1</span>
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">System & Environment Selection</h3>
-                    <Link 
+                    <Link
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step1"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -368,6 +376,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Hydroponic System Type Selection</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step2"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -385,6 +394,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Growing Media for Malaysian Gardeners</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step3"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -402,6 +412,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">When to Plant?</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step4"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -422,6 +433,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Handling Seeds and Seedlings</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step5"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -439,6 +451,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Nutrient Management for Hydroponics</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step6"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -456,6 +469,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Pest & Disease Management</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/hydroponics#step7"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -493,6 +507,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Choose Your Indoor Space</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step1"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -510,6 +525,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Select Your Containers & Equipment</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step2"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -527,6 +543,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Select Your Growing Media</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step3"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -544,6 +561,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">When to Plant?</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step4"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -564,6 +582,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Handling Seeds and Seedlings</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step5"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -581,6 +600,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Nutrient Solutions & Fertilizing</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step6"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >
@@ -598,6 +618,7 @@ const PlantCareGuide = () => {
                     </div>
                     <h3 className="font-bold text-gray-800 mb-2">Pest & Disease Management</h3>
                     <Link 
+                      onClick={handleCareClick}
                       to="/guides/potted-soil#step7"
                       className="mt-2 inline-block text-orange-600 hover:text-orange-700 font-medium text-sm"
                     >

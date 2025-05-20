@@ -1,10 +1,13 @@
-import { React, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Flower2, Droplets, Leaf, Sun, CloudRain } from 'lucide-react';
+import { Flower2, Droplets, CircleArrowLeft } from 'lucide-react';
+import { getNavigationContext } from '../../hooks/navigationContext';
+
 
 const GeneralCare = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const context = getNavigationContext();
   
   // Redirect to potted-soil by default if we're just at /guides
   useEffect(() => {
@@ -16,8 +19,60 @@ const GeneralCare = () => {
     }
   }, [location, navigate]);
 
+  // Function to handle back navigation based on context
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    
+    if (!context) {
+      // Fallback if no context exists
+      navigate('/');
+      return;
+    }
+    
+    switch (context.sourceType) {
+      case 'plant':
+        navigate(`/care-guides/${context.sourceId}`);
+        break;
+      case 'grow':
+        navigate('/care-guides');
+        break;
+      case 'recommender':
+        navigate('/plant-recommender');
+        break;
+      default:
+        navigate('/');
+    }
+  };
+  
+  // Determine back button text based on navigation context
+  const getBackButtonText = () => {
+    if (!context) return 'Back to Homepage';
+    
+    switch (context.sourceType) {
+      case 'plant':
+        return 'Back to Plant Care Guides Detail';
+      case 'grow':
+        return 'Back to Care Guides';
+      case 'recommender':
+        return 'Back to Plant Recommender';
+      default:
+        return 'Back to Homepage';
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Navigation */}
+      <div className="mb-6">
+        <a 
+          href="#" 
+          onClick={handleBackClick}
+          className="flex items-center text-green-600 hover:text-green-700 transition-colors"
+        >
+          <CircleArrowLeft className="w-4 h-4 mr-2" />
+          {getBackButtonText()}
+        </a>
+      </div>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-green-700 to-green-500 text-white rounded-lg mb-10 overflow-hidden">
         <div className="md:flex">
