@@ -11,16 +11,6 @@ const GreenMap = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Function to handle back navigation
-  const handleBackToSearch = () => {
-    // Navigate back to the search page
-    window.history.back();
-    
-    // Add a small delay to ensure navigation begins before scrolling
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
-  };
 
   // State for filters
   const [districts, setDistricts] = useState([]);
@@ -42,8 +32,8 @@ const GreenMap = () => {
   const spacesPerPage = 5;
 
   // API base URL
-  const API_BASE_URL = '/api'; // Deployed URL
-  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  // const API_BASE_URL = '/api'; // Deployed URL
+  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {
     const fetchSpaces = async () => {
@@ -240,12 +230,12 @@ const GreenMap = () => {
               </p>
               {/* Navigation */}
               <div className="mb-6 mt-6">
-                <button 
-                  onClick={handleBackToSearch} 
+                <Link 
+                  to="/"
                   className="flex items-center text-green-500 hover:text-green-700 transition-colors">
                   <CircleArrowLeft className="w-4 h-4 mr-2" />
                   Back to Homepage
-                </button>
+                </Link>
               </div>
             </div>
           </div>

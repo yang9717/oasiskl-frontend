@@ -15,23 +15,12 @@ const GreenSpaceDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Function to handle back navigation
-  const handleBackToSearch = () => {
-    // Navigate back to the search page
-    window.history.back();
-    
-    // Add a small delay to ensure navigation begins before scrolling
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
-  };
-
   const handlePlantClick = () => {
     saveNavigationContext('space', id);
   };
   
-  const API_BASE_URL = '/api'; // Deploy URL
-  // const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
+  // const API_BASE_URL = '/api'; // Deploy URL
+  const API_BASE_URL = 'http://localhost:3000'; // Uncomment for local development
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -167,12 +156,12 @@ const GreenSpaceDetail = () => {
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Navigation */}
       <div className="mb-6">
-        <button 
-          onClick={handleBackToSearch} 
+        <Link 
+          to="/map"
           className="flex items-center text-green-500 hover:text-green-700 transition-colors">
           <CircleArrowLeft className="w-4 h-4 mr-2" />
-          Back to Search
-        </button>
+          Back to Space Search
+        </Link>
       </div>
       {/* Hero Banner for Green Space Detail Page */}
       <div className="mb-10 flex flex-col md:flex-row gap-6">
@@ -290,9 +279,129 @@ const GreenSpaceDetail = () => {
           </div>
         </div>
       </div>
+      
+      {/* Plants Section */}
+      <div className="mb-10">
+        {/* Plants Section Header */}
+        <div className="mb-6">
+          <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-5 shadow-sm">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
+                <Leaf className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="ml-4">
+                <h2 className="text-2xl font-bold text-gray-800">Most Observed Plants in {greenSpace.space_name || 'This Area'}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      {/* Plants Content */}
+      <div className="bg-white p-6 rounded-lg shadow-sm">
+        {/* Plants content here */}
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-500 p-4 bg-red-50 rounded-lg">
+            <p>Failed to load plants: {error}</p>
+            <button 
+              className="mt-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              onClick={() => window.location.reload()}
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center">
+            {/* First row: 3 plants */}
+            <div className="flex flex-wrap justify-center gap-8 mb-8 w-full">
+              {plants.slice(0, 3).map((plant) => (
+                <div 
+                  key={plant.plant_id} 
+                  className="w-64 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  {/* Plant Image */}
+                  <div className="h-52 bg-gray-200 overflow-hidden">
+                    <img 
+                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
+                      alt={plant.plant_name}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Plant Info - Simplified */}
+                  <div className="p-4">
+                    <div className="flex items-center justify-center mb-4">
+                      <Sprout className="w-5 h-5 mr-2 text-green-500" />
+                      <h3 className="text-lg font-semibold text-gray-800">{plant.plant_name}</h3>
+                    </div>
+                    
+                    <Link
+                      to={`/plants/${plant.plant_id}`}
+                      onClick={handlePlantClick}
+                      className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
+                      Learn more
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Second row: 2 plants */}
+            <div className="flex flex-wrap justify-center gap-8 w-full">
+              {plants.slice(3, 5).map((plant) => (
+                <div 
+                  key={plant.plant_id} 
+                  className="w-64 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  {/* Plant Image */}
+                  <div className="h-52 bg-gray-200 overflow-hidden">
+                    <img 
+                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
+                      alt={plant.plant_name}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Plant Info - Simplified */}
+                  <div className="p-4">
+                    <div className="flex items-center justify-center mb-4">
+                      <Sprout className="w-5 h-5 mr-2 text-green-500" />
+                      <h3 className="text-lg font-semibold text-gray-800">{plant.plant_name}</h3>
+                    </div>
+                    
+                    <Link
+                      to={`/plants/${plant.plant_id}`}
+                      onClick={handlePlantClick}
+                      className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
+                      Learn more
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Show message if no plants found */}
+        {!loading && !error && plants.length === 0 && (
+          <div className="text-center p-8 bg-gray-50 rounded-lg">
+            <Sprout className="w-10 h-10 text-gray-400 mx-auto mb-2" />
+            <p className="text-gray-600">No plants have been recorded for this green space yet.</p>
+          </div>
+        )}
+      </div>
 
       {/* Features/Amenities */}
-      <div className="mb-10">
+      <div className="mb-10 mt-10">
         {/* Amenities & Features Header */}
         <div className="mb-6">
           <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-5 shadow-sm">
@@ -429,126 +538,6 @@ const GreenSpaceDetail = () => {
             <div ref={mapRef} className="w-full h-full"></div>
           </div>
         </div>
-      </div>
-
-      {/* Plants Section */}
-      <div className="mb-10">
-        {/* Plants Section Header */}
-        <div className="mb-6">
-          <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-5 shadow-sm">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 bg-white rounded-full p-3 shadow-sm">
-                <Leaf className="w-6 h-6 text-green-600" />
-              </div>
-              <div className="ml-4">
-                <h2 className="text-2xl font-bold text-gray-800">Most Observed Plants in {greenSpace.space_name || 'This Area'}</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-      {/* Plants Content */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        {/* Plants content here */}
-        {loading ? (
-          <div className="flex justify-center items-center h-40">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
-          </div>
-        ) : error ? (
-          <div className="text-center text-red-500 p-4 bg-red-50 rounded-lg">
-            <p>Failed to load plants: {error}</p>
-            <button 
-              className="mt-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-              onClick={() => window.location.reload()}
-            >
-              Try Again
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center">
-            {/* First row: 3 plants */}
-            <div className="flex flex-wrap justify-center gap-8 mb-8 w-full">
-              {plants.slice(0, 3).map((plant) => (
-                <div 
-                  key={plant.plant_id} 
-                  className="w-64 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  {/* Plant Image */}
-                  <div className="h-52 bg-gray-200 overflow-hidden">
-                    <img 
-                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
-                      alt={plant.plant_name}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                      onError={(e) => {
-                        e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Plant Info - Simplified */}
-                  <div className="p-4">
-                    <div className="flex items-center justify-center mb-4">
-                      <Sprout className="w-5 h-5 mr-2 text-green-500" />
-                      <h3 className="text-lg font-semibold text-gray-800">{plant.plant_name}</h3>
-                    </div>
-                    
-                    <Link
-                      to={`/plants/${plant.plant_id}`}
-                      onClick={handlePlantClick}
-                      className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
-                      Learn more
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Second row: 2 plants */}
-            <div className="flex flex-wrap justify-center gap-8 w-full">
-              {plants.slice(3, 5).map((plant) => (
-                <div 
-                  key={plant.plant_id} 
-                  className="w-64 bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  {/* Plant Image */}
-                  <div className="h-52 bg-gray-200 overflow-hidden">
-                    <img 
-                      src={`/assets/plants_images/${plant.plant_id}.jpg`}
-                      alt={plant.plant_name}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                      onError={(e) => {
-                        e.target.src = 'https://placehold.co/600x400?text=Plant+Image';
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Plant Info - Simplified */}
-                  <div className="p-4">
-                    <div className="flex items-center justify-center mb-4">
-                      <Sprout className="w-5 h-5 mr-2 text-green-500" />
-                      <h3 className="text-lg font-semibold text-gray-800">{plant.plant_name}</h3>
-                    </div>
-                    
-                    <Link
-                      to={`/plants/${plant.plant_id}`}
-                      onClick={handlePlantClick}
-                      className="block w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-center font-medium">
-                      Learn more
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Show message if no plants found */}
-        {!loading && !error && plants.length === 0 && (
-          <div className="text-center p-8 bg-gray-50 rounded-lg">
-            <Sprout className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-            <p className="text-gray-600">No plants have been recorded for this green space yet.</p>
-          </div>
-        )}
       </div>
     </div>
   </div>
