@@ -1,49 +1,65 @@
 ## OasisKL Web Application Frontend (React)
 #### TM07 (FIT5120 2025 S1)
 
-### Iteration 1:
-#### Epic 1: Green Space Discovery (MUST HAVE)
-This epic helps KL residents easily find and explore green spaces in the city. Many people don’t know where to go for outdoor activities, and information about parks is often scattered or incomplete. With an interactive map, users can search for parks, gardens, and nature spots, check detailed information, and plan their visits more easily.
+[![OasisKL Website](https://img.shields.io/badge/OasisKL-Website-41B883?style=for-the-badge&logo=google-chrome)](https://www.oasiskl.tech/)
 
-##### User Story 1.1 - Discover Nearby Green Spaces
-As a KL resident with limited knowledge of local nature spots, 
-I want to use an interactive map on the OasisKL website to explore all available parks, gardens, and natural areas in my vicinity, 
-so that I can easily discover green spaces near me and reconnect with nature despite living in an urban environment.
+[![Product Video](https://img.shields.io/badge/Product-Video-FF0000?style=for-the-badge&logo=youtube)](https://youtu.be/88bQUNh4e-k)
 
-#### Acceptance Criteria 1.1
-Given the user wants to look for a specific green space,
-when they are in the ‘Interactive Map’ tab in our website,
-then they should see a map with markers of green spaces and an A-Z ordered list of all available green spaces, categorized by region.
+## 1 Background
+Kuala Lumpur has undergone rapid urbanization over the past decades, resulting in a significant reduction in accessible green spaces and a growing disconnect between residents and local biodiversity. As more people live in high-rise buildings with limited outdoor interaction, opportunities to engage with nature—both physically and educationally—have become increasingly scarce.  
 
-#### User Story 1.2 -  Access Detailed Green Space Information
-As a KL resident planning outdoor activities, 
-I want to access comprehensive information about each green space from the map interface, 
-so that I can make informed decisions about which locations best suit my needs and preferences before visiting.
+**OasisKL** was created to bridge this gap by providing a digital platform that makes urban greenery more visible, accessible, and interactive. By integrating technology with environmental education, the platform enables users to discover public green spaces, learn about local plant species, and cultivate their own green environments at home.  
 
-#### Acceptance Criteria 1.2
-Given the user is on the ‘Interactive Map’ tab in our website,
-when they click on a green space marker on the map,
-then an information panel should display the park name, address, nearby public transport options, opening hours, available facilities (e.g., restrooms, jogging tracks, picnic spots), and photos with user reviews, whenever possible.
+The goal is to reconnect people with nature in meaningful ways while promoting sustainable living and raising awareness of biodiversity across Kuala Lumpur.
 
-### Epic 2: Biodiversity Showcase  (MUST HAVE)
-This epic allows users to discover and learn about plants commonly found in KL’s green spaces. After selecting a park, users can browse the common plant species found there. By clicking on a plant's name, they can access detailed information about its characteristics, scientific classification, and care guidelines. 
+---
 
-#### User Story 2.1 - Browse Plants in Green Spaces
-As a nature enthusiast, 
-I want to find out about plants found in specific parks, 
-so that I can learn about local flora during my visits.
+## 2 Product Overview
+**OasisKL** is a web-based platform that delivers an interactive experience focused on urban biodiversity exploration and community greening.
 
-#### Acceptance Criteria 2.1
-Given the user is viewing a green space’s details page,
-when they click "View Garden Plants,"
-then they should see a list of the common plants in that green space, displayed with images and names in alphabetical order.
+The platform consists of five key features:
 
-#### User Story 2.2 - Access Plant Details
-As a plant lover, 
-I want to view detailed information about specific plants, 
-so that I can learn about their characteristics and care requirements.
+---
 
-#### Acceptance Criteria 2.2
-Given the user selects a plant from the list of common plants, 
-when they get sent to a separate tab for that plant, 
-then they should see comprehensive information including scientific name, description, and care requirements for light, water, temperature, and soil for that plant.
+### 2.1 Discover Green Spaces
+This feature allows users to explore parks, gardens, and public green areas across Kuala Lumpur through an interactive map.  
+
+Users can apply filters such as district, entry fee, and available facilities (e.g., rest areas or playgrounds) to find locations that match their preferences.  
+
+Each green space includes detailed information about its facilities and plant species. Users can further explore these plants through seamless integration with the **Plant Gallery** and other platform features.
+
+---
+
+### 2.2 Grow Your Green Corner
+This feature provides step-by-step guides to help users create their own indoor or balcony gardens using either soil-based or hydroponic methods.  
+
+Designed for both beginners and plant enthusiasts, it covers plant selection, daily care routines, and essential gardening practices.  
+
+Each guide includes practical advice on potting, watering, sunlight requirements, and troubleshooting common issues such as pests or yellowing leaves. Tailored to Kuala Lumpur’s urban lifestyle, this feature makes it easy to cultivate greenery even in limited spaces.
+
+---
+
+### 2.3 Plant Gallery
+The **Plant Gallery** is a curated collection of plant species commonly found in Kuala Lumpur, aimed at helping users explore local biodiversity.  
+
+Users can filter plants using tag-based categories such as suitability, care level, and gardening type.  
+
+Each plant has a dedicated detail page with essential information, including care tips and light/water requirements. From there, users can navigate to related features such as the **Grow Your Green Corner** guides or locate the plant within specific green spaces.
+
+---
+
+### 2.4 Plant Recommender
+The **Plant Recommender** suggests suitable plants based on the user’s lifestyle and environment.  
+
+By answering three simple questions related to available space, care capacity, and plant preferences, users receive personalized recommendations.  
+
+Each recommendation includes care tips and links to relevant features such as the **Plant Gallery** and **Grow Your Green Corner**, enabling users to take immediate action. This feature is especially helpful for beginners seeking quick and reliable guidance.
+
+---
+
+### 2.5 AI Plant Identifier
+The **AI Plant Identifier** allows users to upload a photo of a plant and instantly receive its name along with key information such as characteristics and care requirements.  
+
+Powered by image recognition technology, this feature simplifies plant identification for users with little or no prior knowledge.  
+
+After identification, users can explore additional information via the **Plant Gallery**, access care guides, or add the plant to their personal **Green Corner** for tracking and maintenance.
